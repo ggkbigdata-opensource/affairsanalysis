@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ggk.affairsanalysis.mapper.DemoMapper">
+
+	<select id="queryDemos" resultType="java.util.List">
+		SELECT  idStr
+		from tbl_demo
+		where idStr like%#{idStr}%
+	</select>
+
+</mapper>
