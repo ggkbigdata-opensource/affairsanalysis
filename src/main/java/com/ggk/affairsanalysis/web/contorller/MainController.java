@@ -1,5 +1,6 @@
 package com.ggk.affairsanalysis.web.contorller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +35,20 @@ public class MainController {
 			LOGGER.error(e.getLocalizedMessage());
 		}
         result.addObject("demos", demos);
+        return result;
+    }
+    
+    @RequestMapping(value = "/query/hotlineAmounts/")
+    public ModelAndView queryHotlineAmounts(@RequestParam String date) {
+        ModelAndView result = new ModelAndView("hotlineAmounts");
+        List<String> list = new ArrayList<String>();
+        list.add("22");
+        list.add("324");
+        list.add("54");
+        list.add("78");
+        list.add("76");
+        list.add("33");
+        result.addObject("list", list);
         return result;
     }
 }

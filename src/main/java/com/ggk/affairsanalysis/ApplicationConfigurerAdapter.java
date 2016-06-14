@@ -19,7 +19,7 @@ public class ApplicationConfigurerAdapter extends WebMvcConfigurerAdapter{
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("WEB-INF/classes/static/html");
+        resolver.setPrefix("WEB-INF/classes/static/html/");
         resolver.setSuffix(".html");
         return resolver;
     }
