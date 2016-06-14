@@ -27,7 +27,7 @@ public class MainController {
     
     @RequestMapping(value = "/")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView result = new ModelAndView("demo");
+        ModelAndView result = new ModelAndView("/html/hotlineAmounts.html");
         List<Demo> demos = null;
         try {
         	demos = demoService.queryDemos("demo");
@@ -39,16 +39,7 @@ public class MainController {
     }
     
     @RequestMapping(value = "/query/hotlineAmounts/")
-    public ModelAndView queryHotlineAmounts(@RequestParam String date) {
-        ModelAndView result = new ModelAndView("hotlineAmounts");
-        List<String> list = new ArrayList<String>();
-        list.add("22");
-        list.add("324");
-        list.add("54");
-        list.add("78");
-        list.add("76");
-        list.add("33");
-        result.addObject("list", list);
-        return result;
+    public String queryHotlineAmounts(@RequestParam String date) {
+    	return date;
     }
 }
