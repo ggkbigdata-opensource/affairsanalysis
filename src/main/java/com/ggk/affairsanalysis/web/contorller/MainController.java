@@ -1,6 +1,5 @@
 package com.ggk.affairsanalysis.web.contorller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +34,7 @@ public class MainController {
 			LOGGER.error(e.getLocalizedMessage());
 		}
         result.addObject("demos", demos);
+        result.getModel().put("test", "");
         return result;
     }
     
