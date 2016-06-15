@@ -26,7 +26,7 @@ public class MainController {
     
     @RequestMapping(value = "/")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView result = new ModelAndView("/html/page/heatmap.html");
+        ModelAndView result = new ModelAndView("/html/page/gz_heatmap.html");
         List<Demo> demos = null;
         try {
         	demos = demoService.queryDemos("demo");
