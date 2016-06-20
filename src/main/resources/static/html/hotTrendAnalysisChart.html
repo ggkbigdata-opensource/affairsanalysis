@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;IE=8;">
+
+<title>热点走势分析图</title>
+<script type="text/javascript">
+window.pageStatus = false;
+var PPval = {
+    adjust: 1466133206000 - new Date(),
+    dataStm: 1465920000000,
+    modCtrl: '',
+    hostUrl: function (u) {return u.split('/').slice(0,3).join('/');}(location.href),
+    baseUrl: '/',
+    routeUrl: '/',
+    staticUrl: '/static/',
+    imgsUrl: '/static/imgs/',
+    dataface: '/Interface/',
+    isSnap: 1
+};
+</script>
+<link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/styles.css">
+<script src="./js/hotTrendAnalysisChartJs/logger.js"></script>
+<link href="./js/hotTrendAnalysisChartJs/bdsstyle.css" rel="stylesheet" type="text/css">
+<script src="./js/lib/baidu/echarts.min.js"></script>
+<script src="./js/lib/jquery/jquery.min.js"></script>
+</head>
+<body>
+	<div class="mw1300" id="trendTools">
+		<div id="lTools" class="lTools sZone">
+			<div id="lTools_c">
+				<form id="adv_pannel" class="" autocomplete="off">
+					<div class="tabUnit" id="">
+						<div class="tabTitle">
+							<div class="tabKey">
+								<div id="currentTabKey" class="sltTxt">按关键词</div>
+							</div>
+						</div>
+						<div class="tabConts" style="padding-top: 8px; *z-index: 1; float: left;" id="">
+							<div class="tabCont tabContWord" id="">
+								<input type="hidden" name="type" value="0"> 
+								<a href="javascript:;" id="addFavBtn" class="dsn addFav" onclick="BID.addFavWords()"><i class="icons add"></i><span>关注</span></a>
+								<div id="compOthtime" class="compOth" ctlname="time">
+									<div class="comCtl">
+										<div class="comBorderL">
+											<span class="selectA rangeDate" limitb="20110101" onclick="BID.rangeDate()" style="background-image: none;" id=""> 
+												<span class="icontext">时间：</span> 
+												<input class="sltVal" name="time" type="hidden" value="13">
+												<span class="sltTxt">最近30天</span> 
+											    <i class="icons hdArDn"></i>
+												<div class="sltOpt">
+													<a href="http://index.baidu.com/?tpl=trend&amp;word=NBA#12">最近7天</a>
+													<a href="http://index.baidu.com/?tpl=trend&amp;word=NBA#13">最近30天</a>
+												</div>
+											</span>
+										</div>
+										<div class="comBorderR">
+											<i class="icons delComp" onclick="BID.add_del_comp()"></i>
+										</div>
+									</div>
+								</div>
+								<div class="compVsplit"></div>
+								<ul class="compUl hideDel" ctlname="word">
+									<li class="compLi comCtl" id="">
+										<div class="comBorderL">
+											<div class="inner" style="width: 120px;">
+												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+											</div>
+										</div>
+										<div class="comBorderR" style="border-color: rgb(62, 199, 245);"></div> 
+										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+										<i title="添加组合词" class="addComp">+</i>
+									</li>
+									<li class="compLi comCtl dsn">
+										<div class="comBorderL">
+											<div class="inner" style="width: 120px;">
+												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+											</div>
+										</div>
+										<div class="comBorderR"></div> 
+										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+										<i title="添加组合词" class="addComp">+</i>
+									</li>
+									<li class="compLi comCtl dsn">
+										<div class="comBorderL">
+											<div class="inner" style="width: 120px;">
+												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+											</div>
+										</div>
+										<div class="comBorderR"></div> 
+										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+										<i title="添加组合词" class="addComp">+</i>
+									</li>
+									<li class="compLi comCtl dsn">
+										<div class="comBorderL">
+											<div class="inner" style="width: 120px;">
+												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+											</div>
+										</div>
+										<div class="comBorderR"></div> 
+										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+										<i title="添加组合词" class="addComp">+</i>
+									</li>
+									<li class="compLi comCtl dsn">
+										<div class="comBorderL">
+											<div class="inner" style="width: 120px;">
+												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+											</div>
+										</div>
+										<div class="comBorderR"></div> 
+										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+										<i title="添加组合词" class="addComp">+</i>
+									</li>
+								</ul>
+								<a href="javascript:;" class="addComp" onclick="BID.add_del_comp()"><i class="icons add"></i><span>添加对比词</span></a>
+							</div>
+						</div>
+						<a id="advSearchSubmit" href="javascript:;" onclick="BID.advSearch()">确定</a>
+					</div>
+				</form>
+				<form autocomplete="off" style="display: none;">
+					<div id="advTpls_word">
+						<div class="comBorderL">
+							<div class="inner" style="width: 120px;">
+								<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
+							</div>
+						</div>
+						<div class="comBorderR"></div>
+						<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
+						<i title="添加组合词" class="addComp">+</i>
+					</div>
+				</form>
+				<div id="banner_trend"></div>
+			</div>
+		</div>
+		<div id="mainWrap">
+			<div class="mainSplit">
+				<div class="blkUnit grpUnit" id="trendProfile">
+					<div class="titlBar" style="padding-bottom: 15px;" id="auto_gsid_1">
+						<h4>指数概况</h4>
+						<i class="icons help" onclick="BID.showHelpTip(&#39;hptp_tProfile&#39;)"></i> 
+						<span class="compInfo" style="display: none;"> </span>
+						<span class="compInfo">2016-06-09 至 2016-06-15</span>
+					</div>
+					<div class="tabUnit" id="auto_gsid_2">
+						<div class="tabTitle" id="auto_gsid_3">
+							<div class="stmTabs tabUl" onclick="BID.tabFun()" id="auto_gsid_4">
+								<a class="tabLi gColor0 curr" href="javascript:;" id="" title="近7天" style="display: block;">
+								    <div class="nmTab">近7天</div>
+									<div class="hvTab">近7天</div>
+								</a>
+								<a class="tabLi gColor1" href="javascript:;" id="" title="近30天" style="display: block;">
+									<div class="nmTab">近30天</div>
+									<div class="hvTab">近30天</div>
+								</a>
+								<a class="tabLi gColor2" href="javascript:;" style="display: none;">
+									<div class="nmTab"></div>
+									<div class="hvTab"></div>
+								</a>
+								<a class="tabLi gColor3" href="javascript:;" style="display: none;">
+								    <div class="nmTab"></div>
+									<div class="hvTab"></div>
+								</a>
+								<a class="tabLi gColor4" href="javascript:;" style="display: none;">
+								    <div class="nmTab"></div>
+									<div class="hvTab"></div>
+								</a>
+							</div>
+						</div>
+						<div class="tabConts" id="auto_gsid_5">
+							<div class="toLoading" style="display: none;">
+								<div class="loadingImg"></div>
+							</div>
+							<div class="tabCont gColor0" style="zoom: 1;" id="">
+								<table class="mtable profWagv">
+									<tbody>
+										<tr>
+											<th>&nbsp;</th>
+											<th>
+											    <div class="lrRadius">
+													<div class="lrRl"></div>
+													<div class="lrRc"> 
+													        整体搜索指数<span class="tsp">|</span>移动搜索指数
+													</div>
+													<div class="lrRr"></div>
+												</div>
+											</th>
+											<th>
+											    <div class="lrRadius">
+													<div class="lrRl"></div>
+													<div class="lrRc">
+														整体同比<span class="tsp">|</span>整体环比
+													</div>
+													<div class="lrRr"></div>
+												</div>
+											</th>
+											<th>
+											    <div class="lrRadius">
+													<div class="lrRl"></div>
+													<div class="lrRc">
+														移动同比<span class="tsp">|</span>移动环比
+													</div>
+													<div class="lrRr"></div>
+												</div>
+											</th>
+										</tr>
+										<tr>
+											<td class="tpWord">
+											    <div class="toe" style="color: #3ec7f5;" title="nba">nba</div>
+											</td>
+											<td>
+											    <div class="lrRadius">
+													<span class="ftlwhf enc2imgVal">
+														<span class="imgval" style="width: 5px;">
+														    <div class="imgtxt" style="margin-left: -16px;"></div>
+														</span>
+														<span class="imgval" style="width: 19px;">
+														    <div class="imgtxt" style="margin-left: -29px;"></div>
+													    </span>
+													    <span class="imgval" style="width: 4px;">
+													        <div class="imgtxt" style="margin-left: -64px;"></div>
+													    </span>
+													    <span class="imgval" style="width: 20px;">
+													        <div class="imgtxt" style="margin-left: -132px;"></div>
+													    </span>
+													    <span class="imgval" style="width: 8px;">
+													        <div class="imgtxt" style="margin-left: -176px;"></div>
+													    </span>
+													    <span class="imgval" style="width: 16px;">
+													        <div class="imgtxt" style="margin-left: -224px;"></div>
+													    </span>
+                                                    </span> 
+                                                    <span class="ftlwhf enc2imgVal">
+                                                        <span class="imgval" style="width: 8px;">
+                                                            <div class="imgtxt" style="margin-left: -288px;"></div>
+                                                        </span>
+                                                        <span class="imgval" style="width: 16px;">
+                                                            <div class="imgtxt" style="margin-left: -312px;"></div>
+                                                        </span>
+                                                        <span class="imgval" style="width: 4px;">
+                                                            <div class="imgtxt" style="margin-left: -368px;"></div>
+                                                        </span>
+                                                        <span class="imgval" style="width: 20px;">
+                                                            <div class="imgtxt" style="margin-left: -396px;"></div>
+                                                        </span>
+                                                        <span class="imgval" style="width: 6px;">
+                                                            <div class="imgtxt" style="margin-left: -416px;"></div>
+                                                        </span>
+                                                        <span class="imgval" style="width: 2px;">
+                                                            <div class="imgtxt" style="margin-left: -438px;"></div>
+                                                        </span>
+                                                    </span>
+												</div>
+											</td>
+											<td>
+											    <div class="lrRadius">
+													<span class="ftlwhf imgnums">
+													    <span class="ratDown">-<i style="background-position: -16px -2px;"></i>
+													        <i style="background-position: -80px -2px;"></i>
+													    </span>
+													</span> 
+													<span class="ftlwhf imgnums">
+													    <span class="ratUp">
+														    <i style="background-position: -16px -2px;"></i>
+														    <i style="background-position: -32px -2px;"></i>
+														    <i style="background-position: -80px -2px;"></i>
+													    </span>
+													</span>
+												</div>
+											</td>
+											<td>
+											    <div class="lrRadius">
+													<span class="ftlwhf imgnums">
+													    <span class="ratDown">-<i style="background-position: -8px -2px;"></i>
+															<i style="background-position: -56px -2px;"></i>
+															<i style="background-position: -80px -2px;"></i>
+													    </span>
+													</span> 
+													<span class="ftlwhf imgnums">
+													    <span class="ratUp"><i style="background-position: -16px -2px;"></i>
+													        <i style="background-position: -32px -2px;"></i>
+													        <i style="background-position: -80px -2px;"></i>
+													    </span>
+													</span>
+												</div>
+										    </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+<style>
+.tipopWords {
+	z-index: 6;
+	position: absolute;
+	margin-top: -25px;
+}
+
+.tipopWords .contentWord {
+	padding: 3px 5px;
+	font-size: 12px;
+	border: 1px solid #4d4d4d;
+	border-radius: 4px;
+	background-color: #4d4d4d;
+	color: #fff;
+}
+
+.tipopWords .showPoint {
+	position: absolute;
+	left: 50%;
+	bottom: 0px;
+	width: 10px;
+	margin-left: -5px;
+}
+
+.showPoint .arrBorder, .showPoint .arrContent {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border: 5px dashed transparent;
+	border-bottom: none;
+}
+
+.showPoint .arrBorder {
+	border-top: 5px solid #4d4d4d;
+	bottom: -5px;
+}
+
+.showPoint .arrContent {
+	border-top: 5px solid #4d4d4d;
+	bottom: -4px;
+}
+</style>
+				<div class="blkUnit grpUnit intrtUnit" id="trend-wrap">
+					<div class="titlBar" style="padding-bottom: 16px;" id="auto_gsid_7">
+						<h4>指数趋势</h4>
+						<i class="icons help" onclick="BID.showHelpTip(&#39;hptp_trend&#39;)"></i> 
+						<span class="compInfo">nba</span>
+						<span class="compInfo">2016-05-17 至 2016-06-15</span>
+					</div>
+					<div class="grpArea" style="width: 100%; overflow: hidden; position: relative; z-index: 0;" id="auto_gsid_15">
+						<div class="toLoading" style="display: none;">
+							<div class="loadingImg"></div>
+						</div>
+						<div style="position: absolute; top: 0; z-index: 2; width: 100%;">
+							<ul class="tab-hd trendtype" data-type="trendtype" style="position: absolute; left: 20px; top: 20px;">
+								<li data-value="all" class="active"><i class="icon-all"></i>整体趋势</li>
+								<li data-value="pc"><i class="icon-pc"></i>PC趋势</li>
+								<li data-value="wise"><i class="icon-wise"></i>移动趋势</li>
+							</ul>
+							<div class="box-toolbar" style="right: 17px; top: 26px;">
+								<label style="line-height: 32px; cursor: default;" class="tab-circle-label">最近</label> 
+								<a class="chartselect" rel="7" href="javascript:void(0)">7天</a> 
+								<a class="chartselect chartselect-click" rel="30" href="javascript:void(0)">30天</a> 
+								<a class="chartselect" rel="90" href="javascript:void(0)">90天</a> 
+								<a class="chartselect" rel="180" href="javascript:void(0)">半年</a>
+								<a class="chartselect" rel="all" href="javascript:void(0)">全部</a>
+							</div>
+						</div>
+						<div id="container" class="R_paper" style="height: 480px; _background-color: #fff;"></div>
+					</div>
+				</div>
+				<div class="ftc"></div>
+			</div>
+		</div>
+	</div>
+<style>
+.bdshare_popup_box {
+	left: auto !important;
+	right: 10px;
+}
+</style>
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+    var base = +new Date(1968, 9, 3);
+    var oneDay = 24 * 3600 * 1000;
+    var date = [];
+
+    var data = [Math.random() * 300];
+
+    for (var i = 1; i < 20000; i++) {
+        var now = new Date(base += oneDay);
+        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-'));
+        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+    }
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            position: function (pt) {
+                return [pt[0], '10%'];
+            }
+        },
+        title: {
+            left: 'center',
+            text: '大数据量折线图',
+        },
+        legend: {
+            top: 'bottom',
+            data:['意向']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: date
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%']
+        },
+        dataZoom: [{
+            type: 'inside',
+            start: 0,
+            end: 10
+        }, {
+            start: 0,
+            end: 10
+        }],
+        series: [
+            {
+                name:'模拟数据',
+                type:'line',
+                smooth:true,
+                symbol: 'none',
+                sampling: 'average',
+                itemStyle: {
+                    normal: {
+                        color: 'rgb(255, 70, 131)'
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgb(255, 158, 68)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(255, 70, 131)'
+                        }])
+                    }
+                },
+                data: data
+            }
+        ]
+    };
+</script>
+</body>
+</html>

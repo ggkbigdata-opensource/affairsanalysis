@@ -42,4 +42,33 @@ public class MainController {
     public String queryHotlineAmounts(@RequestParam String date) {
     	return date;
     }
+    
+    @RequestMapping(value = "/index")
+    public ModelAndView index1(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView result = new ModelAndView("/html/index.html");
+        List<Demo> demos = null;
+        try {
+        	demos = demoService.queryDemos("demo");
+		} catch (Exception e) {
+			LOGGER.error(e.getLocalizedMessage());
+		}
+        result.addObject("demos", demos);
+        result.getModel().put("test", "");
+        return result;
+    }
+    
+    @RequestMapping(value = "/hotTrendAnalysisChart")
+    public ModelAndView hotTrendAnalysisChart(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView result = new ModelAndView("/html/hotTrendAnalysisChart.html");
+        List<Demo> demos = null;
+        try {
+        	demos = demoService.queryDemos("demo");
+		} catch (Exception e) {
+			LOGGER.error(e.getLocalizedMessage());
+		}
+        result.addObject("demos", demos);
+        result.getModel().put("test", "");
+        return result;
+    }
+    
 }
