@@ -6,7 +6,8 @@ drop table if exists tbl_ans_hotwords;
 create table tbl_ans_hotwords
 (
    id                   numeric(64,0) not null,
-   frequency_count              numeric(64,0),
+   frequency_count      numeric(64,0),
+   word_name            varchar(255),
    area                 varchar(255),
    create_date          timestamp default now(),
    update_date          timestamp default now(),
