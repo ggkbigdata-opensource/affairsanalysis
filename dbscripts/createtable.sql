@@ -17,6 +17,17 @@ create table tbl_ans_hotwords
 );
 
 /*==============================================================*/
+/* Table: tbl_ans_wo_hotwords                                     */
+/*==============================================================*/
+drop table if exists tbl_ans_wo_hotwords;
+CREATE TABLE tbl_ans_wo_hotwords (
+  wo_id varchar(255) DEFAULT NULL,
+  hotwords varchar(255) DEFAULT NULL,
+  id int(11) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	¡¤
+/*==============================================================*/
 /* Table: tbl_ans_workorder                                     */
 /*==============================================================*/
 create table tbl_ans_workorder
