@@ -1,54 +1,32 @@
-drop table if exists tbl_ans_calltraffic;
-
-/*==============================================================*/
-/* Table: tbl_ans_calltraffic                                   */
-/*==============================================================*/
-create table tbl_ans_calltraffic
-(
-   id                   numeric(64,0) not null,
-   traffic              numeric(64,0),
-   area                 varchar(255),
-   create_date          timestamp default now(),
-   update_date          timestamp,
-   time_size            varchar(64),
-   primary key (id)
-);
 drop table if exists tbl_ans_hotwords;
 
 /*==============================================================*/
-/* Table: tbl_ans_hotwords                                      */
+/* Table: tbl_ans_hotwords                                   */
 /*==============================================================*/
 create table tbl_ans_hotwords
 (
    id                   numeric(64,0) not null,
-   hotword_name         varchar(255),
-   hotword_times        numeric(64,0),
-   create_date          timestamp default now(),
-   update_date          timestamp,
-   time_size            varchar(64),
-   summary_date         timestamp,
+   frequency_count      numeric(64,0),
+   word_name            varchar(255),
    area                 varchar(255),
+   create_date          timestamp default now(),
+   update_date          timestamp default now(),
+   statistical_date     timestamp not null,
+   time_size            varchar(64),
    primary key (id)
 );
-drop table if exists tbl_ans_livelihoodindex;
 
 /*==============================================================*/
-/* Table: tbl_ans_livelihoodindex                               */
+/* Table: tbl_ans_wo_hotwords                                     */
 /*==============================================================*/
-create table tbl_ans_livelihoodindex
-(
-   id                   numeric(64,0) not null,
-   index_code           varchar(64) not null,
-   index_name           varchar(64),
-   index_value          numeric(64,0),
-   time_size            varchar(64),
-   create_date          timestamp  default now(),
-   update_date          timestamp,
-   area                 varchar(255),
-   primary key (id, index_code)
-);
-drop table if exists tbl_ans_workorder;
-
+drop table if exists tbl_ans_wo_hotwords;
+CREATE TABLE tbl_ans_wo_hotwords (
+  wo_id varchar(255) DEFAULT NULL,
+  hotwords varchar(255) DEFAULT NULL,
+  id int(11) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	¡¤
 /*==============================================================*/
 /* Table: tbl_ans_workorder                                     */
 /*==============================================================*/
