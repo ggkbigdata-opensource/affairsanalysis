@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ggk.affairsanalysis.mapper.AnsHotwordsMapper">
+	<select id="queryAnsHotwords" resultType="string">
+		SELECT word_name 
+		FROM tbl_ans_hotwords 
+		WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate} AND area &lt;&gt; ''
+		GROUP BY word_name 
+		ORDER BY sum(frequency_count) DESC LIMIT 10
+	</select>
+	<select id="queryMainChart" resultType="AnsHotwords">
+       SELECT * FROM 
+       tbl_ans_hotwords  
+       WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate} AND word_name = #{subject}  AND area &lt;&gt; ''
+       ORDER BY statistical_date ASC
+    </select>
+    <select id="queryHotTrendAnalysisChart" resultType="AnsHotwords">
+       SELECT *,SUM(frequency_count) as sumCount FROM 
+	   tbl_ans_hotwords  
+	   WHERE statistical_date &gt;= adddate(curdate(), #{day}) AND statistical_date &lt;= date(NOW()) AND area = '' AND word_name in 
+	   <foreach item="item" index="index" collection="wordList" open="(" separator="," close=")">  
+		  #{item} 
+	   </foreach>
+	   GROUP BY word_name,statistical_date
+	   ORDER BY word_name,statistical_date
+    </select>
+    <select id="queryEveryoneAsk" resultType="AnsHotwords">
+        SELECT a.*,SUM(frequency_count) sumCount
+		FROM tbl_ans_hotwords a
+		WHERE a.area = ''
+		GROUP BY word_name 
+		ORDER BY sum(frequency_count) DESC LIMIT 10
+    </select>
+    
+</mapper>

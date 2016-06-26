@@ -1,464 +1,579 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;IE=8;">
+ <meta charset="utf-8">
+    <title>广州市政府服务热线</title>
+    <link id="bs-css" href="./css/bootstrap-cerulean.min.css" rel="stylesheet">
 
-<title>热点走势分析图</title>
-<script type="text/javascript">
-window.pageStatus = false;
-var PPval = {
-    adjust: 1466133206000 - new Date(),
-    dataStm: 1465920000000,
-    modCtrl: '',
-    hostUrl: function (u) {return u.split('/').slice(0,3).join('/');}(location.href),
-    baseUrl: '/',
-    routeUrl: '/',
-    staticUrl: '/static/',
-    imgsUrl: '/static/imgs/',
-    dataface: '/Interface/',
-    isSnap: 1
-};
-</script>
-<link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/styles.css">
-<script src="./js/hotTrendAnalysisChartJs/logger.js"></script>
-<link href="./js/hotTrendAnalysisChartJs/bdsstyle.css" rel="stylesheet" type="text/css">
+    <link href="./css/charisma-app.css" rel="stylesheet">
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='./bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='./bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='./bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='./bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='./css/jquery.noty.css' rel='stylesheet'>
+    <link href='./css/noty_theme_default.css' rel='stylesheet'>
+    <link href='./css/elfinder.min.css' rel='stylesheet'>
+    <link href='./css/elfinder.theme.css' rel='stylesheet'>
+    <link href='./css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='./css/uploadify.css' rel='stylesheet'>
+    <link href='./css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="./bower_components/jquery/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/styles.css">
+<link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/jquery-ui.min.css">
 <script src="./js/lib/baidu/echarts.min.js"></script>
 <script src="./js/lib/jquery/jquery.min.js"></script>
+<script src="./js/hotTrendAnalysisChartJs/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="./js/home/styles.css">
+<link rel="stylesheet" href="./js/home/tips.css">
+<style type="text/css">
+.tip-group table {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tip-item {
+    display: block;
+    margin: 0 auto 50px auto;
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    height: 560px;
+}
+
+.tip-group {
+    padding-top: 0%;
+}
+ .zsClass {
+    z-index: 4;
+    position: relative;
+    height: 16px;
+    padding: 20px 20px 20px 0;
+    background-color: #ECF1F3;
+}
+</style>
 </head>
+
 <body>
-	<div class="mw1300" id="trendTools">
-		<div id="lTools" class="lTools sZone">
-			<div id="lTools_c">
-				<form id="adv_pannel" class="" autocomplete="off">
-					<div class="tabUnit" id="">
-						<div class="tabTitle">
-							<div class="tabKey">
-								<div id="currentTabKey" class="sltTxt">按关键词</div>
-							</div>
-						</div>
-						<div class="tabConts" style="padding-top: 8px; *z-index: 1; float: left;" id="">
-							<div class="tabCont tabContWord" id="">
-								<input type="hidden" name="type" value="0"> 
-								<a href="javascript:;" id="addFavBtn" class="dsn addFav" onclick="BID.addFavWords()"><i class="icons add"></i><span>关注</span></a>
-								<div id="compOthtime" class="compOth" ctlname="time">
-									<div class="comCtl">
-										<div class="comBorderL">
-											<span class="selectA rangeDate" limitb="20110101" onclick="BID.rangeDate()" style="background-image: none;" id=""> 
-												<span class="icontext">时间：</span> 
-												<input class="sltVal" name="time" type="hidden" value="13">
-												<span class="sltTxt">最近30天</span> 
-											    <i class="icons hdArDn"></i>
-												<div class="sltOpt">
-													<a href="http://index.baidu.com/?tpl=trend&amp;word=NBA#12">最近7天</a>
-													<a href="http://index.baidu.com/?tpl=trend&amp;word=NBA#13">最近30天</a>
-												</div>
-											</span>
-										</div>
-										<div class="comBorderR">
-											<i class="icons delComp" onclick="BID.add_del_comp()"></i>
-										</div>
-									</div>
-								</div>
-								<div class="compVsplit"></div>
-								<ul class="compUl hideDel" ctlname="word">
-									<li class="compLi comCtl" id="">
-										<div class="comBorderL">
-											<div class="inner" style="width: 120px;">
-												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-											</div>
-										</div>
-										<div class="comBorderR" style="border-color: rgb(62, 199, 245);"></div> 
-										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-										<i title="添加组合词" class="addComp">+</i>
-									</li>
-									<li class="compLi comCtl dsn">
-										<div class="comBorderL">
-											<div class="inner" style="width: 120px;">
-												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-											</div>
-										</div>
-										<div class="comBorderR"></div> 
-										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-										<i title="添加组合词" class="addComp">+</i>
-									</li>
-									<li class="compLi comCtl dsn">
-										<div class="comBorderL">
-											<div class="inner" style="width: 120px;">
-												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-											</div>
-										</div>
-										<div class="comBorderR"></div> 
-										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-										<i title="添加组合词" class="addComp">+</i>
-									</li>
-									<li class="compLi comCtl dsn">
-										<div class="comBorderL">
-											<div class="inner" style="width: 120px;">
-												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-											</div>
-										</div>
-										<div class="comBorderR"></div> 
-										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-										<i title="添加组合词" class="addComp">+</i>
-									</li>
-									<li class="compLi comCtl dsn">
-										<div class="comBorderL">
-											<div class="inner" style="width: 120px;">
-												<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-											</div>
-										</div>
-										<div class="comBorderR"></div> 
-										<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-										<i title="添加组合词" class="addComp">+</i>
-									</li>
-								</ul>
-								<a href="javascript:;" class="addComp" onclick="BID.add_del_comp()"><i class="icons add"></i><span>添加对比词</span></a>
-							</div>
-						</div>
-						<a id="advSearchSubmit" href="javascript:;" onclick="BID.advSearch()">确定</a>
-					</div>
-				</form>
-				<form autocomplete="off" style="display: none;">
-					<div id="advTpls_word">
-						<div class="comBorderL">
-							<div class="inner" style="width: 120px;">
-								<input name="word" class="comWord" maxlength="50" onmousedown="BID.createSug()" autocomplete="off">
-							</div>
-						</div>
-						<div class="comBorderR"></div>
-						<i class="icons delComp" onclick="BID.add_del_comp()"></i> 
-						<i title="添加组合词" class="addComp">+</i>
-					</div>
-				</form>
-				<div id="banner_trend"></div>
-			</div>
-		</div>
-		<div id="mainWrap">
-			<div class="mainSplit">
-				<div class="blkUnit grpUnit" id="trendProfile">
-					<div class="titlBar" style="padding-bottom: 15px;" id="auto_gsid_1">
-						<h4>指数概况</h4>
-						<i class="icons help" onclick="BID.showHelpTip(&#39;hptp_tProfile&#39;)"></i> 
-						<span class="compInfo" style="display: none;"> </span>
-						<span class="compInfo">2016-06-09 至 2016-06-15</span>
-					</div>
-					<div class="tabUnit" id="auto_gsid_2">
-						<div class="tabTitle" id="auto_gsid_3">
-							<div class="stmTabs tabUl" onclick="BID.tabFun()" id="auto_gsid_4">
-								<a class="tabLi gColor0 curr" href="javascript:;" id="" title="近7天" style="display: block;">
-								    <div class="nmTab">近7天</div>
-									<div class="hvTab">近7天</div>
-								</a>
-								<a class="tabLi gColor1" href="javascript:;" id="" title="近30天" style="display: block;">
-									<div class="nmTab">近30天</div>
-									<div class="hvTab">近30天</div>
-								</a>
-								<a class="tabLi gColor2" href="javascript:;" style="display: none;">
-									<div class="nmTab"></div>
-									<div class="hvTab"></div>
-								</a>
-								<a class="tabLi gColor3" href="javascript:;" style="display: none;">
-								    <div class="nmTab"></div>
-									<div class="hvTab"></div>
-								</a>
-								<a class="tabLi gColor4" href="javascript:;" style="display: none;">
-								    <div class="nmTab"></div>
-									<div class="hvTab"></div>
-								</a>
-							</div>
-						</div>
-						<div class="tabConts" id="auto_gsid_5">
-							<div class="toLoading" style="display: none;">
-								<div class="loadingImg"></div>
-							</div>
-							<div class="tabCont gColor0" style="zoom: 1;" id="">
-								<table class="mtable profWagv">
-									<tbody>
-										<tr>
-											<th>&nbsp;</th>
-											<th>
-											    <div class="lrRadius">
-													<div class="lrRl"></div>
-													<div class="lrRc"> 
-													        整体搜索指数<span class="tsp">|</span>移动搜索指数
-													</div>
-													<div class="lrRr"></div>
-												</div>
-											</th>
-											<th>
-											    <div class="lrRadius">
-													<div class="lrRl"></div>
-													<div class="lrRc">
-														整体同比<span class="tsp">|</span>整体环比
-													</div>
-													<div class="lrRr"></div>
-												</div>
-											</th>
-											<th>
-											    <div class="lrRadius">
-													<div class="lrRl"></div>
-													<div class="lrRc">
-														移动同比<span class="tsp">|</span>移动环比
-													</div>
-													<div class="lrRr"></div>
-												</div>
-											</th>
-										</tr>
-										<tr>
-											<td class="tpWord">
-											    <div class="toe" style="color: #3ec7f5;" title="nba">nba</div>
-											</td>
-											<td>
-											    <div class="lrRadius">
-													<span class="ftlwhf enc2imgVal">
-														<span class="imgval" style="width: 5px;">
-														    <div class="imgtxt" style="margin-left: -16px;"></div>
-														</span>
-														<span class="imgval" style="width: 19px;">
-														    <div class="imgtxt" style="margin-left: -29px;"></div>
-													    </span>
-													    <span class="imgval" style="width: 4px;">
-													        <div class="imgtxt" style="margin-left: -64px;"></div>
-													    </span>
-													    <span class="imgval" style="width: 20px;">
-													        <div class="imgtxt" style="margin-left: -132px;"></div>
-													    </span>
-													    <span class="imgval" style="width: 8px;">
-													        <div class="imgtxt" style="margin-left: -176px;"></div>
-													    </span>
-													    <span class="imgval" style="width: 16px;">
-													        <div class="imgtxt" style="margin-left: -224px;"></div>
-													    </span>
-                                                    </span> 
-                                                    <span class="ftlwhf enc2imgVal">
-                                                        <span class="imgval" style="width: 8px;">
-                                                            <div class="imgtxt" style="margin-left: -288px;"></div>
-                                                        </span>
-                                                        <span class="imgval" style="width: 16px;">
-                                                            <div class="imgtxt" style="margin-left: -312px;"></div>
-                                                        </span>
-                                                        <span class="imgval" style="width: 4px;">
-                                                            <div class="imgtxt" style="margin-left: -368px;"></div>
-                                                        </span>
-                                                        <span class="imgval" style="width: 20px;">
-                                                            <div class="imgtxt" style="margin-left: -396px;"></div>
-                                                        </span>
-                                                        <span class="imgval" style="width: 6px;">
-                                                            <div class="imgtxt" style="margin-left: -416px;"></div>
-                                                        </span>
-                                                        <span class="imgval" style="width: 2px;">
-                                                            <div class="imgtxt" style="margin-left: -438px;"></div>
-                                                        </span>
-                                                    </span>
-												</div>
-											</td>
-											<td>
-											    <div class="lrRadius">
-													<span class="ftlwhf imgnums">
-													    <span class="ratDown">-<i style="background-position: -16px -2px;"></i>
-													        <i style="background-position: -80px -2px;"></i>
-													    </span>
-													</span> 
-													<span class="ftlwhf imgnums">
-													    <span class="ratUp">
-														    <i style="background-position: -16px -2px;"></i>
-														    <i style="background-position: -32px -2px;"></i>
-														    <i style="background-position: -80px -2px;"></i>
-													    </span>
-													</span>
-												</div>
-											</td>
-											<td>
-											    <div class="lrRadius">
-													<span class="ftlwhf imgnums">
-													    <span class="ratDown">-<i style="background-position: -8px -2px;"></i>
-															<i style="background-position: -56px -2px;"></i>
-															<i style="background-position: -80px -2px;"></i>
-													    </span>
-													</span> 
-													<span class="ftlwhf imgnums">
-													    <span class="ratUp"><i style="background-position: -16px -2px;"></i>
-													        <i style="background-position: -32px -2px;"></i>
-													        <i style="background-position: -80px -2px;"></i>
-													    </span>
-													</span>
-												</div>
-										    </td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-<style>
-.tipopWords {
-	z-index: 6;
-	position: absolute;
-	margin-top: -25px;
-}
-
-.tipopWords .contentWord {
-	padding: 3px 5px;
-	font-size: 12px;
-	border: 1px solid #4d4d4d;
-	border-radius: 4px;
-	background-color: #4d4d4d;
-	color: #fff;
-}
-
-.tipopWords .showPoint {
-	position: absolute;
-	left: 50%;
-	bottom: 0px;
-	width: 10px;
-	margin-left: -5px;
-}
-
-.showPoint .arrBorder, .showPoint .arrContent {
-	position: absolute;
-	width: 0;
-	height: 0;
-	overflow: hidden;
-	border: 5px dashed transparent;
-	border-bottom: none;
-}
-
-.showPoint .arrBorder {
-	border-top: 5px solid #4d4d4d;
-	bottom: -5px;
-}
-
-.showPoint .arrContent {
-	border-top: 5px solid #4d4d4d;
-	bottom: -4px;
-}
-</style>
-				<div class="blkUnit grpUnit intrtUnit" id="trend-wrap">
-					<div class="titlBar" style="padding-bottom: 16px;" id="auto_gsid_7">
-						<h4>指数趋势</h4>
-						<i class="icons help" onclick="BID.showHelpTip(&#39;hptp_trend&#39;)"></i> 
-						<span class="compInfo">nba</span>
-						<span class="compInfo">2016-05-17 至 2016-06-15</span>
-					</div>
-					<div class="grpArea" style="width: 100%; overflow: hidden; position: relative; z-index: 0;" id="auto_gsid_15">
-						<div class="toLoading" style="display: none;">
-							<div class="loadingImg"></div>
-						</div>
-						<div style="position: absolute; top: 0; z-index: 2; width: 100%;">
-							<ul class="tab-hd trendtype" data-type="trendtype" style="position: absolute; left: 20px; top: 20px;">
-								<li data-value="all" class="active"><i class="icon-all"></i>整体趋势</li>
-								<li data-value="pc"><i class="icon-pc"></i>PC趋势</li>
-								<li data-value="wise"><i class="icon-wise"></i>移动趋势</li>
-							</ul>
-							<div class="box-toolbar" style="right: 17px; top: 26px;">
-								<label style="line-height: 32px; cursor: default;" class="tab-circle-label">最近</label> 
-								<a class="chartselect" rel="7" href="javascript:void(0)">7天</a> 
-								<a class="chartselect chartselect-click" rel="30" href="javascript:void(0)">30天</a> 
-								<a class="chartselect" rel="90" href="javascript:void(0)">90天</a> 
-								<a class="chartselect" rel="180" href="javascript:void(0)">半年</a>
-								<a class="chartselect" rel="all" href="javascript:void(0)">全部</a>
-							</div>
-						</div>
-						<div id="container" class="R_paper" style="height: 480px; _background-color: #fff;"></div>
-					</div>
-				</div>
-				<div class="ftc"></div>
-			</div>
-		</div>
-	</div>
-<style>
-.bdshare_popup_box {
-	left: auto !important;
-	right: 10px;
-}
-</style>
+    <input id="sp_ids" value=${wordName}>
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/affairsanalysis">
+                <span>政府服务热线</span></a>
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                </button>
+            </div>
+        </div>
+    </div>
+<div class="ch-container">
+    <div class="row" style="background-color: #ECF1F3;">
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                       <li class="nav-header">模块</li>
+                        <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li><a class="ajax-link" href="#"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+            <div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="/affairsanalysis">模块</a>
+        </li>
+        <li>
+            <a href="./hotTrendAnalysisChart">大家都在问</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+<body>
+    <div class="mw1300" style="margin-left: 0px;"id="trendTools">
+        <div id="lTools" class="lTools sZone">
+            <div id="lTools_c">
+                <form id="adv_pannel" class="" autocomplete="off">
+                    <div class="tabUnit" id="">
+                        <div class="tabTitle">
+                            <div class="tabKey">
+                                <div id="currentTabKey" class="sltTxt">按关键词</div>
+                            </div>
+                        </div>
+                        <div class="tabConts" style="padding-top: 8px; *z-index: 1; float: left;" >
+                            <div class="tabCont tabContWord" id="">
+                                <div id="compOthtime" class="compOth">
+                                    <div class="comCtl">
+                                        <div class="comBorderL">
+                                            <span class=" rangeDate" limitb="20110101"> 
+                                                <span class="icontext">时间：</span> 
+                                                <span class="sltTxt" id="timeTxt">最近30天</span> 
+                                            </span>
+                                        </div>
+                                        <div class="comBorderR">
+                                            <i class="icons delComp" onclick="BID.add_del_comp()"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="compVsplit"></div>
+                                <ul class="compUl hideDel" ctlname="word">
+                                    <li class="compLi comCtl" id="li1">
+                                        <div class="comBorderL">
+                                            <div class="inner" style="width: 120px">
+                                                <input style="width: 110px;" name="word1" id = "word1" class="comWord" maxlength="50" autocomplete="off" value="">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="compLi comCtl dsn" id="li2">
+                                        <div class="comBorderL">
+                                            <div class="inner" style="width: 120px;">
+                                                <input style="width: 110px;" name="word2" id = "word2" class="comWord" maxlength="50" autocomplete="off">
+                                            </div>
+                                        </div>
+                                         <img src="./img/delete.png" width="8px" height="8px"  style="margin: -15px 0 0 0;" onclick="deleteCop(2)"/>
+                                    </li>
+                                    <li class="compLi comCtl dsn" id="li3">
+                                        <div class="comBorderL">
+                                            <div class="inner" style="width: 120px;">
+                                                <input style="width: 110px;" name="word3" id = "word3" class="comWord" maxlength="50"autocomplete="off">
+                                            </div>
+                                        </div>
+                                         <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(3)"/>
+                                    </li>
+                                    <li class="compLi comCtl dsn" id="li4">
+                                        <div class="comBorderL">
+                                            <div class="inner" style="width: 120px;">
+                                                <input style="width: 110px;" name="word4" id = "word4" class="comWord" maxlength="50" autocomplete="off">
+                                                
+                                            </div>
+                                        </div>
+                                         <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(4)"/>
+                                    </li>
+                                    <li class="compLi comCtl dsn" id="li5">
+                                        <div class="comBorderL">
+                                            <div class="inner" style="width: 120px;">
+                                                <input style="width: 110px;" name="word5" id = "word5" class="comWord" maxlength="50" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(5)"/>
+                                    </li>
+                                </ul>
+                                <a id="addCop" href="javascript:;" class="addComp" onclick="addCop()"><i class="icons add"></i><span>添加对比词</span></a>
+                            </div>
+                        </div>
+                        <a id="advSearchSubmit" href="javascript:;" onclick="serachInfo()">确定</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="mainWrap" style="background-color: #ECF1F3;">
+            <div class="mainSplit" style="background-color: #ECF1F3;">
+                <div class="zsClass" id="trend-wrap" style="background-color: #ECF1F3;">
+                    <div class="titlBar" style="padding-bottom: 16px;" id="auto_gsid_7" >
+                        <h4>指数趋势</h4>
+                    </div>  
+                    <div class="grpArea" style="width: 100%; overflow: hidden; position: relative; z-index: 0;" id="auto_gsid_15">
+                        <div style="position: absolute; top: 0; z-index: 2; width: 100%;">
+                            <div class="box-toolbar" style="right: 17px; top: 26px;">
+                                <label style="line-height: 32px; cursor: default;" class="tab-circle-label">最近</label> 
+                                <a class="chartselect" rel="7" href="javascript:void(0)" onclick="serachInfo(7)">7天</a> 
+                                <a class="chartselect" rel="30" href="javascript:void(0)" onclick="serachInfo(30)">30天</a> 
+                                <a class="chartselect" rel="90" href="javascript:void(0)" onclick="serachInfo(90)">90天</a> 
+                                <a class="chartselect" rel="180" href="javascript:void(0)" onclick="serachInfo(180)">半年</a>
+                            </div>
+                        </div>
+                        <div id="container"  style="height: 600px; _background-color: #fff;padding-top: 20px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <script type="text/javascript">
-    var dom = document.getElementById("container");
-    var myChart = echarts.init(dom);
-    var app = {};
-    option = null;
-    var base = +new Date(1968, 9, 3);
-    var oneDay = 24 * 3600 * 1000;
-    var date = [];
-
-    var data = [Math.random() * 300];
-
-    for (var i = 1; i < 20000; i++) {
-        var now = new Date(base += oneDay);
-        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-'));
-        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+    var copIndexArr = [2,3,4,5];
+    var ulIndex = 2;
+    var dayIndex = 30;
+    var colorArr= ["#3ec7f5","#2cc312","#e7882e","#f362a5","#b16ec2"]
+    var bgColorArr = ["rgba(62, 199, 245, 0.3)","rgba(44,195,18,0.3)","rgba(231, 136, 46, 0.3)","rgba(243, 98, 165, 0.3)","rgba(177, 110, 194, 0.3)"]
+    $(function(){
+    	$("#word1").val(decodeURIComponent((location.search.substr(location.search.indexOf("=")+1))));
+        var availableTags = [];
+        var myDate = new Date();
+        var newData = myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate(); 
+        $.ajax({
+            url : './querySubject',
+            type : 'post', // 数据发送方式
+            data:{startDate:GetDateStr(-30),endDate:newData},
+            success : function(data) {
+                availableTags = data;
+                $( "#word1" ).autocomplete({
+                   source: availableTags
+                });
+                $( "#word2" ).autocomplete({
+                   source: availableTags
+                });
+                $( "#word3" ).autocomplete({
+                   source: availableTags
+                });
+                $( "#word4" ).autocomplete({
+                   source: availableTags
+                });
+                $( "#word5" ).autocomplete({
+                   source: availableTags
+                });
+            }
+        });
+        
+        var word = $('#word1').val();
+        $.ajax({
+            url : './queryHotTrendAnalysisChart',
+            type : 'post', // 数据发送方式
+            data:{day:"30",wordList:word},
+            success : function(data) {
+                var wordList = [];
+                var yearList = [];
+                var chartData =[];
+                for(var i=30-1;i>=0;i--){
+                    yearList.push(GetDateStr(-i));
+                }
+                for(var d in data){
+                    if(d=="remove"){
+                        continue;
+                    }
+                    if(!isExist(wordList,data[d].wordName)){
+                        wordList.push(data[d].wordName)
+                    }
+                }
+                for(var w in wordList){
+                    if(w=="remove"){
+                        continue;
+                    }
+                    var dataArr = [];
+                    for(var y in yearList){
+                        var isTrue = false;
+                            for(var d in data){
+                                if(d=="remove"){
+                                    continue;
+                                }
+                                if(wordList[w]==data[d].wordName&&yearList[y]==data[d].time){
+                                if(yearList[y]==data[d].time){
+                                    isTrue = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(isTrue){
+                            dataArr.push(data[d].frequencyCount);
+                        }else{
+                            dataArr.push(0);
+                        }
+                    }
+                    var chartArr =  {
+                            name:wordList[w],
+                            type:'line',
+                            smooth:true,
+                            symbol: 'none',
+                            sampling: 'average',
+                            itemStyle: {
+                                normal: {
+                                     color: '#3ec7f5'
+                                }
+                            },
+                           areaStyle: {
+                               normal: {
+                                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
+                                       offset: 1,
+                                       color: 'rgba(62, 199, 245, 0.3)'
+                                   }])
+                               }
+                            },
+                            data:dataArr
+                        };
+                    chartData.push(chartArr);
+                }
+                optionList(wordList,yearList,chartData)
+                chartInit();
+            }
+         });
+    });
+    function GetDateStr(AddDayCount) 
+    { 
+        var dd = new Date(); 
+        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+        var y = dd.getFullYear(); 
+        var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+        var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+        return y+"-"+m+"-"+d; 
     }
-
-    option = {
-        tooltip: {
-            trigger: 'axis',
-            position: function (pt) {
-                return [pt[0], '10%'];
+    function isExist(arr,value){
+        if(arr.length>0){
+            for(var a in arr){
+                if(arr[a]==value){
+                    return true;
+                }
             }
-        },
-        title: {
-            left: 'center',
-            text: '大数据量折线图',
-        },
-        legend: {
-            top: 'bottom',
-            data:['意向']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-                restore: {show: true},
-                saveAsImage: {show: true}
+        }
+        return false;
+    }
+    function chartInit(){
+        var myChart = echarts.init(document.getElementById('container'));
+        myChart.setOption(option);
+    }
+    var option;
+    function optionList(wordList,yearList,data){
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
+            legend: {
+                 data:wordList
+            },
+            backgroundColor: '#ECF1F3',
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: yearList
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, '5%']
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 0,
+                end: 100,
+            }, {
+                start:0,
+                end: 100
+            }],
+            series: data
+        };
+    }
+    function addCop(){
+        $('#li'+copIndexArr[0]).removeClass("dsn");
+        copIndexArr.remove(copIndexArr[0]);
+        if($('.dsn').length==0){
+            $("#addCop").hide();
+        }
+    }
+    function serachInfo(day){
+        if(day!=""&&day!=undefined){
+            dayIndex = day;
+            $("#timeTxt").text("最近"+day+"天");
+        }
+        var word = "";
+        var word1 = $('#word1').val();
+        var word2 = $('#word2').val();
+        var word3 = $('#word3').val();
+        var word4 = $('#word4').val();
+        var word5 = $('#word5').val();
+        if(word1!=""){
+            if(word!=""){
+                word += "," + word1;
+            }else{
+                word += word1;
             }
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: date
-        },
-        yAxis: {
-            type: 'value',
-            boundaryGap: [0, '100%']
-        },
-        dataZoom: [{
-            type: 'inside',
-            start: 0,
-            end: 10
-        }, {
-            start: 0,
-            end: 10
-        }],
-        series: [
-            {
-                name:'模拟数据',
-                type:'line',
-                smooth:true,
-                symbol: 'none',
-                sampling: 'average',
-                itemStyle: {
-                    normal: {
-                        color: 'rgb(255, 70, 131)'
+        }else{
+            $('#li1').addClass("dsn");
+        }
+        if(word2!=""){
+            if(word!=""){
+                word += "," + word2;
+            }else{
+                word += word2;
+            }
+        }else{
+            $('#li2').addClass("dsn");
+            copIndexArr.push(2);
+        }
+        if(word3!=""){
+            if(word!=""){
+                word += "," + word3;
+            }else{
+                word += word3;
+            }
+        }else{
+            $('#li3').addClass("dsn");
+            copIndexArr.push(3);
+        }
+        if(word4!=""){
+            if(word!=""){
+                word += "," + word4;
+            }else{
+                word += word4;
+            }
+        }else{
+            $('#li4').addClass("dsn");
+            copIndexArr.push(4);
+        }
+        if(word5!=""){
+            if(word!=""){
+                word += "," + word5;
+            }else{
+                word += word5;
+            }
+        }else{
+            $('#li5').addClass("dsn");
+            copIndexArr.push(5);
+        }
+        if($('.dsn').length>0){
+            $("#addCop").show();
+        }
+        $.ajax({
+            url : './queryHotTrendAnalysisChart',
+            type : 'post', // 数据发送方式
+            data:{day:dayIndex,wordList:word},
+            success : function(data) {
+                var wordList = [];
+                var yearList = [];
+                var chartData =[];
+                for(var i=dayIndex-1;i>=0;i--){
+                    yearList.push(GetDateStr(-i));
+                }
+                for(var d in data){ 
+                    if(d=="remove"){
+                        continue;
                     }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(255, 158, 68)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(255, 70, 131)'
-                        }])
+                    if(!isExist(wordList,data[d].wordName)){
+                        wordList.push(data[d].wordName)
                     }
-                },
-                data: data
+                }
+                for(var w in wordList){
+                    if(w=="remove"){
+                        continue;
+                    }
+                    var dataArr = [];
+                    for(var y in yearList){
+                        var isTrue = false;
+                            for(var d in data){
+                                if(d=="remove"){
+                                    continue;
+                                }
+                                if(wordList[w]==data[d].wordName&&yearList[y]==data[d].time){
+                                if(yearList[y]==data[d].time){
+                                    isTrue = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if(isTrue){
+                            dataArr.push(data[d].frequencyCount);
+                        }else{
+                            dataArr.push(0);
+                        }
+                    }
+                    var chartArr =  {
+                            name:wordList[w],
+                            type:'line',
+                            smooth:true,
+                            symbol: 'none',
+                            sampling: 'average',
+                            itemStyle: {
+                                normal: {
+                                     color: colorArr[w]
+                                }
+                            },
+                           areaStyle: {
+                               normal: {
+                                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
+                                       offset: 1,
+                                       color: bgColorArr[w]
+                                   }])
+                               }
+                            },
+                            data:dataArr
+                        };
+                    chartData.push(chartArr);
+                }
+                optionList(wordList,yearList,chartData)
+                chartInit();
             }
-        ]
+         });
+    }
+    function deleteCop(i){
+        $('#li'+i).addClass("dsn");
+        $('#word'+i).val("");
+        if($('.dsn').length>0){
+            $("#addCop").show();
+        }
+        copIndexArr.push(i);
+    }
+    Array.prototype.indexOf = function(val) {
+        for (var i = 0; i < this.length; i++) {
+        if (this[i] == val) return i;
+        }
+        return -1;
+    };
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+        this.splice(index, 1);
+        }
     };
 </script>
+</body>
+</div>
+
+</div>
+</div>
+</div>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- library for cookie management -->
+<script src="./js/jquery.cookie.js"></script>
+<!-- calender plugin -->
+<script src='./bower_components/moment/min/moment.min.js'></script>
+<script src='./bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- data table plugin -->
+<script src='./js/jquery.dataTables.min.js'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="./bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- plugin for gallery image view -->
+<script src="./bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- notification plugin -->
+<script src="./js/jquery.noty.js"></script>
+<!-- library for making tables responsive -->
+<script src="./bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="./bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- star rating plugin -->
+<script src="./js/jquery.raty.min.js"></script>
+<!-- for iOS style toggle switch -->
+<script src="./js/jquery.iphone.toggle.js"></script>
+<!-- autogrowing textarea plugin -->
+<script src="./js/jquery.autogrow-textarea.js"></script>
+<!-- multiple file upload plugin -->
+<script src="./js/jquery.uploadify-3.1.min.js"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="./js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="./js/charisma.js"></script>
+
+
 </body>
 </html>

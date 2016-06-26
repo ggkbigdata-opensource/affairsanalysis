@@ -209,10 +209,6 @@
   border-bottom: 1px solid #f1f1f1;
 }
 
-#tips{
-  background: url("images/tips-bg.png?1") 0 0 repeat-x;
-}
-
 #tips_header .icons.membnot{
   background: url('../../imgs/icon-user2.png') no-repeat 2px 1px;
 }

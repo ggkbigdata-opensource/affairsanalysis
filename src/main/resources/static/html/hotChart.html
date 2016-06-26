@@ -1,17 +1,353 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
-    <meta charset="utf-8">
+ <meta charset="utf-8">
+    <title>广州市政府服务热线</title>
+    <link id="bs-css" href="./css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="./css/charisma-app.css" rel="stylesheet">
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='./bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='./bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='./bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='./bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='./css/jquery.noty.css' rel='stylesheet'>
+    <link href='./css/noty_theme_default.css' rel='stylesheet'>
+    <link href='./css/elfinder.min.css' rel='stylesheet'>
+    <link href='./css/elfinder.theme.css' rel='stylesheet'>
+    <link href='./css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='./css/uploadify.css' rel='stylesheet'>
+    <link href='./css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="./bower_components/jquery/jquery.min.js"></script>
     <!-- 引入 ECharts 文件 -->
     <script src="./js/lib/baidu/echarts.min.js"></script>
     <script src="./js/lib/jquery/jquery.min.js"></script>
     <script src="./js/lib/baidu/guangzhou.js"></script>
-    <script src="./js/page/gz_heatmap.js"></script>
-	<title>guangzhou heatmap</title>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-datetimepicker.js"></script>
+    <script src="./js/bootstrap-datetimepicker.zh-CN.js"></script>
+   
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link type="text/css" rel="stylesheet" href="./js/home/styles.css">
+<link rel="stylesheet" href="./js/home/tips.css">
+    <!-- <link href="./css/bootstrap-theme.min.css" rel="stylesheet" media="screen"> -->
 </head>
+
 <body>
-    <h1 id="test">hello world!</h1>
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/affairsanalysis">
+                <span>政府服务热线</span></a>
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                </button>
+            </div>
+        </div>
+    </div>
+<div class="ch-container">
+    <div class="row">
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                         <li class="nav-header">模块</li>
+                        <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li><a class="ajax-link" href="#"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+            <div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="/affairsanalysis">模块</a>
+        </li>
+        <li>
+            <a href="./hotChart">热力图</a>
+        </li>
+    </ul>
+</div>
+<div class="row" style="background-color: #ECF1F3;">
+<body>
+    <table>
+         <tr>
+             <td style="width:20px"></td>
+             <td style="font-weight: bold;">时间:</td>
+             <td>
+                 <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" onchange="changeDate()">
+                    <input id = "startDate" class="form-control" size="16" type="text" value=""  readonly >
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+             </td>
+             <td>--</td>
+             <td>
+                 <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" onchange="changeDate()">
+                    <input id= 'endDate' class="form-control" size="16" type="text" value=""  readonly >
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+             </td>
+             <td style="width:120px" id="subjectTD1"></td>
+             <td style="font-weight: bold;" id="subjectTD2">主题:</td>
+             <td id="subjectTD3">
+                 <select class="form-control" id="sel_subject" >
+                     <option value=''>-请选择-</option> 
+                 </select>
+             </td>
+             <td style="width:120px"></td>
+             <td>
+                 <button type="button"  id="search" class="btn btn-primary" onclick="searchInfo()">查询</button>
+             </td>
+              <td style="width:50px"></td>
+              <td>
+                 <button type="button"  id = "replayID" class="btn btn-primary" onclick="replay()">播放</button>
+             </td>
+         </tr>
+    </table>
     <hr>
-    <div id="main" style="width:100%;height:600px;"></div>
+    <div id="main" style="width:100%;height:620px;"></div>
+<script type="text/javascript">
+var dataArr = [];
+var yearArr = [];
+$(function(){
+    $('#main').hide();
+    $('#subjectTD1').hide();
+    $('#subjectTD2').hide();
+    $('#subjectTD3').hide();
+    $('#replayID').hide();
+});
+$('.form_date').datetimepicker({
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0
+});
+function changeDate(){
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    var option = "<option value=''>-请选择-</option>";
+    if(startDate!=""&&endDate!=""){
+        $('#subjectTD1').show();
+        $('#subjectTD2').show();
+        $('#subjectTD3').show();
+        $.ajax({
+               url : './querySubject',
+               type : 'post', // 数据发送方式
+               data:{startDate:startDate,endDate:endDate},
+               success : function(data) {
+                   for(var d in data){
+                       option += "<option value='"+data[d]+"'>"+data[d]+"</option>"; 
+                   }
+                   $('#sel_subject').html(option);
+               }
+        });
+    }else{
+        return;
+    }
+}
+
+function searchInfo(){
+    var startDate = $('#startDate').val(); //开始时间
+    var endDate = $('#endDate').val(); //结束时间
+    var subject =  $('#sel_subject').val(); //主题
+    if(startDate==""){
+        alert("请选择开始时间!");
+        return;
+    }
+    if(endDate==""){
+        alert("请选择结束时间!");
+        return;
+    }
+    if(endDate!=""&&endDate<startDate){
+        alert("结束时间不能小于开始时间!");
+        return;
+    }
+    if(subject==""){
+        alert("请选择主题!");
+        return;
+    }
+    if(endDate>startDate){
+        $('#replayID').show();
+    }
+   
+    $.ajax({
+        url : './queryMainChart',
+        type : 'post', // 数据发送方式
+        data:{startDate:startDate,endDate:endDate,subject:subject},
+        success : function(data) {
+            dataArr = data;
+            yearArr = [];
+            var dateS = endDate; 
+            for(var d in dataArr){
+                if(dateS>d){
+                    dateS=d;
+                }
+                yearArr.push(d);
+            }
+            optionList(dataArr[dateS]);
+            $('#main').show();
+            chartInit();
+        }
+ });
+}
+function chartInit(){
+     var myChart = echarts.init(document.getElementById('main'));
+     myChart.setOption(option);
+}
+var geoCoordMap = {
+        "从化市":[113.59286,23.554007],
+        "花都区":[113.226783,23.409758],
+        "增城市":[113.707065,23.331931],
+        "白云区":[113.345156,23.298611],
+        "萝岗区":[113.487145,23.187259],
+        "荔湾区":[113.227586,23.104229],
+        "越秀区":[113.270716,23.135463],
+        "天河区":[113.368571,23.130388],
+        "海珠区":[113.323465,23.089195],
+        "黄埔区":[113.466087,23.112407],
+        "番禺区":[113.391089,22.943638],
+        "南沙区":[113.531584,22.808383]
+    };
+    var convertData = function (data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = geoCoordMap[data[i].area];
+            if (geoCoord) {
+                res.push(geoCoord.concat(data[i].frequencyCount));
+            }
+        }
+        return res;
+    };
+var option;
+function optionList(dataArr,max){
+     option = {
+        title: {
+            text: '广州市热线分布图',
+            subtext: 'data from 12345',
+            sublink: 'http://www.gz.gov.cn',
+            left: 'center',
+            textStyle: {
+                color: 'black'
+            }
+        },
+        backgroundColor: '#ECF1F3',
+        visualMap: {
+            min: 0,
+            max: 1200,
+            splitNumber: 5,
+            inRange: {
+                color: ['#d94e5d','#eac736','#50a3ba'].reverse()
+            },
+            textStyle: {
+                color: '#black'
+            }
+        },
+        geo: {
+            map: '广州',
+            label: {
+                emphasis: {
+                    show: true
+                }
+            },
+            roam: true,
+            itemStyle: {
+                normal: {
+                    areaColor: 'rgba(50, 60, 72,0.9)',
+                    borderColor: '#111'
+                },
+                emphasis: {
+                    areaColor: '#2a333d'
+                }
+            }
+        },
+        series: [{
+            name: 'RD',
+            type: 'heatmap',
+            coordinateSystem: 'geo',
+            data: convertData(dataArr),
+            itemStyle:{
+                normal:{label:{show:true}, textStyle: {color:'white'}},
+                emphasis:{label:{show:true},textStyle: {color:'white'}}
+            }
+        }]
+    };
+}
+function replay(){
+    var i = 0;
+    setInterval(function(){
+        if(i<yearArr.length){
+            optionList(dataArr[yearArr[i]]);
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option); 
+            i++;
+        }
+    },500);
+}
+</script>  
+</body>
+</div>
+
+</div>
+</div>
+</div>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- library for cookie management -->
+<script src="./js/jquery.cookie.js"></script>
+<!-- calender plugin -->
+<script src='./bower_components/moment/min/moment.min.js'></script>
+<script src='./bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- data table plugin -->
+<script src='./js/jquery.dataTables.min.js'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="./bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- plugin for gallery image view -->
+<script src="./bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- notification plugin -->
+<script src="./js/jquery.noty.js"></script>
+<!-- library for making tables responsive -->
+<script src="./bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="./bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- star rating plugin -->
+<script src="./js/jquery.raty.min.js"></script>
+<!-- for iOS style toggle switch -->
+<script src="./js/jquery.iphone.toggle.js"></script>
+<!-- autogrowing textarea plugin -->
+<script src="./js/jquery.autogrow-textarea.js"></script>
+<!-- multiple file upload plugin -->
+<script src="./js/jquery.uploadify-3.1.min.js"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="./js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="./js/charisma.js"></script>
+
+
 </body>
 </html>
