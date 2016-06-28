@@ -19,48 +19,24 @@
     <link href='./css/jquery.iphone.toggle.css' rel='stylesheet'>
     <link href='./css/uploadify.css' rel='stylesheet'>
     <link href='./css/animate.min.css' rel='stylesheet'>
+    
 
     <!-- jQuery -->
     <script src="./bower_components/jquery/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/styles.css">
-<link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/jquery-ui.min.css">
-<script src="./js/lib/baidu/echarts.min.js"></script>
-<script src="./js/lib/jquery/jquery.min.js"></script>
-<script src="./js/hotTrendAnalysisChartJs/jquery-ui.js"></script>
-<link type="text/css" rel="stylesheet" href="./js/home/styles.css">
-<link rel="stylesheet" href="./js/home/tips.css">
-<style type="text/css">
-.tip-group table {
-    table-layout: fixed;
-    width: 100%;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.tip-item {
-    display: block;
-    margin: 0 auto 50px auto;
-    width: 400px;
-    position: relative;
-    overflow: hidden;
-    height: 560px;
-}
-
-.tip-group {
-    padding-top: 0%;
-}
- .zsClass {
-    z-index: 4;
-    position: relative;
-    height: 16px;
-    padding: 20px 20px 20px 0;
-    background-color: #ECF1F3;
-}
-</style>
+	<link type="text/css" rel="stylesheet" href="./js/hotTrendAnalysisChartJs/jquery-ui.min.css">
+	<script src="./js/hotTrendAnalysisChartJs/jquery-ui.js"></script>
+	<script src="./js/lib/baidu/echarts.min.js"></script>
+	
+    <link href='./css/bootstrap-multiselect.css' rel='stylesheet'>
+	<script src="./js/lib/jquery/jquery.min.js"></script>
+    <script src="./js/bootstrap-datetimepicker.js"></script>
+    <script src="./js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script src="./js/bootstrap-multiselect.js"></script>
 </head>
 
 <body>
-    <input id="sp_ids" value=${wordName}>
     <!-- topbar starts -->
     <div class="navbar navbar-default" role="navigation">
         <div class="navbar-inner">
@@ -71,7 +47,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/affairsanalysis">
-                <span>政府服务热线</span></a>
+                <span>政府服务热线</span>
+            </a>
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
@@ -92,8 +69,8 @@
                         </li>
                         <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
                         </li>
-                        <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
-                        <li><a class="ajax-link" href="#"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li class="active"><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -117,11 +94,6 @@
             <div id="lTools_c">
                 <form id="adv_pannel" class="" autocomplete="off">
                     <div class="tabUnit" id="">
-                        <div class="tabTitle">
-                            <div class="tabKey">
-                                <div id="currentTabKey" class="sltTxt">按关键词</div>
-                            </div>
-                        </div>
                         <div class="tabConts" style="padding-top: 8px; *z-index: 1; float: left;" >
                             <div class="tabCont tabContWord" id="">
                                 <div id="compOthtime" class="compOth">
@@ -132,58 +104,43 @@
                                                 <span class="sltTxt" id="timeTxt">最近30天</span> 
                                             </span>
                                         </div>
-                                        <div class="comBorderR">
-                                            <i class="icons delComp" onclick="BID.add_del_comp()"></i>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="compVsplit"></div>
                                 <ul class="compUl hideDel" ctlname="word">
-                                    <li class="compLi comCtl" id="li1">
-                                        <div class="comBorderL">
-                                            <div class="inner" style="width: 120px">
-                                                <input style="width: 110px;" name="word1" id = "word1" class="comWord" maxlength="50" autocomplete="off" value="">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="compLi comCtl dsn" id="li2">
-                                        <div class="comBorderL">
-                                            <div class="inner" style="width: 120px;">
-                                                <input style="width: 110px;" name="word2" id = "word2" class="comWord" maxlength="50" autocomplete="off">
-                                            </div>
-                                        </div>
-                                         <img src="./img/delete.png" width="8px" height="8px"  style="margin: -15px 0 0 0;" onclick="deleteCop(2)"/>
-                                    </li>
-                                    <li class="compLi comCtl dsn" id="li3">
-                                        <div class="comBorderL">
-                                            <div class="inner" style="width: 120px;">
-                                                <input style="width: 110px;" name="word3" id = "word3" class="comWord" maxlength="50"autocomplete="off">
-                                            </div>
-                                        </div>
-                                         <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(3)"/>
-                                    </li>
-                                    <li class="compLi comCtl dsn" id="li4">
-                                        <div class="comBorderL">
-                                            <div class="inner" style="width: 120px;">
-                                                <input style="width: 110px;" name="word4" id = "word4" class="comWord" maxlength="50" autocomplete="off">
-                                                
-                                            </div>
-                                        </div>
-                                         <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(4)"/>
-                                    </li>
-                                    <li class="compLi comCtl dsn" id="li5">
-                                        <div class="comBorderL">
-                                            <div class="inner" style="width: 120px;">
-                                                <input style="width: 110px;" name="word5" id = "word5" class="comWord" maxlength="50" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <img src="./img/delete.png" width="8px" height="8px" style="margin: -15px 0 0 0;"  onclick="deleteCop(5)"/>
+                                    <li class="compLi comCtl">
+                                        <table>
+                                           <tr>
+											   <td style="font-weight: bold;">时间:</td>
+											   <td style="width:200px">
+												   <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" onchange="changeDate()">
+												      <input id = "startDate" class="form-control" size="16" type="text" value=""  readonly >
+												      <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+												      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+												  </div>
+												</td>
+												<td>--</td>
+												<td style="width:200px">
+												    <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" onchange="changeDate()">
+												       <input id= 'endDate' class="form-control" size="16" type="text" value=""  readonly >
+												       <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+												       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+												   </div>
+												</td>
+												<td style="width:50px" id="subjectTD1"></td>
+												<td style="font-weight: bold;" id="subjectTD2">关键字:</td>
+												<td id="subjectTD3" style="width:400px"> 
+												   <select id="sel_wordName" multiple="multiple" size="5"></select>
+												</td>
+												<td>
+												    <button type="button"  id="search" class="btn btn-primary" onclick="serachInfo()">查询</button>
+												</td>
+									         </tr>
+                                        </table>
                                     </li>
                                 </ul>
-                                <a id="addCop" href="javascript:;" class="addComp" onclick="addCop()"><i class="icons add"></i><span>添加对比词</span></a>
                             </div>
                         </div>
-                        <a id="advSearchSubmit" href="javascript:;" onclick="serachInfo()">确定</a>
                     </div>
                 </form>
             </div>
@@ -217,109 +174,223 @@
     var colorArr= ["#3ec7f5","#2cc312","#e7882e","#f362a5","#b16ec2"]
     var bgColorArr = ["rgba(62, 199, 245, 0.3)","rgba(44,195,18,0.3)","rgba(231, 136, 46, 0.3)","rgba(243, 98, 165, 0.3)","rgba(177, 110, 194, 0.3)"]
     $(function(){
-    	$("#word1").val(decodeURIComponent((location.search.substr(location.search.indexOf("=")+1))));
-        var availableTags = [];
-        var myDate = new Date();
-        var newData = myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate(); 
-        $.ajax({
-            url : './querySubject',
-            type : 'post', // 数据发送方式
-            data:{startDate:GetDateStr(-30),endDate:newData},
-            success : function(data) {
-                availableTags = data;
-                $( "#word1" ).autocomplete({
-                   source: availableTags
-                });
-                $( "#word2" ).autocomplete({
-                   source: availableTags
-                });
-                $( "#word3" ).autocomplete({
-                   source: availableTags
-                });
-                $( "#word4" ).autocomplete({
-                   source: availableTags
-                });
-                $( "#word5" ).autocomplete({
-                   source: availableTags
-                });
-            }
-        });
-        
-        var word = $('#word1').val();
-        $.ajax({
-            url : './queryHotTrendAnalysisChart',
-            type : 'post', // 数据发送方式
-            data:{day:"30",wordList:word},
-            success : function(data) {
-                var wordList = [];
-                var yearList = [];
-                var chartData =[];
-                for(var i=30-1;i>=0;i--){
-                    yearList.push(GetDateStr(-i));
-                }
-                for(var d in data){
-                    if(d=="remove"){
-                        continue;
-                    }
-                    if(!isExist(wordList,data[d].wordName)){
-                        wordList.push(data[d].wordName)
-                    }
-                }
-                for(var w in wordList){
-                    if(w=="remove"){
-                        continue;
-                    }
-                    var dataArr = [];
-                    for(var y in yearList){
-                        var isTrue = false;
-                            for(var d in data){
-                                if(d=="remove"){
-                                    continue;
-                                }
-                                if(wordList[w]==data[d].wordName&&yearList[y]==data[d].time){
-                                if(yearList[y]==data[d].time){
-                                    isTrue = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if(isTrue){
-                            dataArr.push(data[d].frequencyCount);
-                        }else{
-                            dataArr.push(0);
-                        }
-                    }
-                    var chartArr =  {
-                            name:wordList[w],
-                            type:'line',
-                            smooth:true,
-                            symbol: 'none',
-                            sampling: 'average',
-                            itemStyle: {
-                                normal: {
-                                     color: '#3ec7f5'
-                                }
-                            },
-                           areaStyle: {
-                               normal: {
-                                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
-                                       offset: 1,
-                                       color: 'rgba(62, 199, 245, 0.3)'
-                                   }])
-                               }
-                            },
-                            data:dataArr
-                        };
-                    chartData.push(chartArr);
-                }
-                optionList(wordList,yearList,chartData)
-                chartInit();
-            }
+    	$("#startDate").val(GetDateStr(-30));
+    	$("#endDate").val(GetDateStr(0));
+    	$('.form_date').datetimepicker({
+    	    language:  'zh-CN',
+    	    weekStart: 1,
+    	    todayBtn:  1,
+    	    autoclose: 1,
+    	    todayHighlight: 1,
+    	    startView: 2,
+    	    minView: 2,
+    	    forceParse: 0
+    	});
+    	 $.ajax({
+             url : './queryEveryoneAsk',
+             type : 'post', // 数据发送方式
+             data:{startDate:$("#startDate").val(),endDate:$("#endDate").val()},
+             success : function(data) {
+                 var selwordNameHtml ="";
+                 var index = 1;
+                 for(var d in data){
+                	 selwordNameHtml += '<option value="'+data[d].wordName+'">'+data[d].wordName+'</option>'
+                 }
+                 $("#sel_wordName").html(selwordNameHtml); 
+                 $('#sel_wordName').multiselect({
+                	 onChange: function(option, checked) {
+                         // Get selected options.
+                         var selectedOptions = $('#sel_wordName option:selected');
+          
+                         if (selectedOptions.length >= 5) {
+                             // Disable all other checkboxes.
+                             var nonSelectedOptions = $('#sel_wordName option').filter(function() {
+                                 return !$(this).is(':selected');
+                             });
+          
+                             var dropdown = $('#sel_wordName').siblings('.multiselect-container');
+                             nonSelectedOptions.each(function() {
+                                 var input = $('input[value="' + $(this).val() + '"]');
+                                 input.prop('disabled', true);
+                                 input.parent('li').addClass('disabled');
+                             });
+                         }
+                         else {
+                             // Enable all checkboxes.
+                             var dropdown = $('#sel_wordName').siblings('.multiselect-container');
+                             $('#sel_wordName option').each(function() {
+                                 var input = $('input[value="' + $(this).val() + '"]');
+                                 input.prop('disabled', false);
+                                 input.parent('li').addClass('disabled');
+                             });
+                         }
+                     }
+                 })
+                 $('#sel_wordName').multiselect('select', [decodeURIComponent((location.search.substr(location.search.indexOf("=")+1)))]);
+                 
+                 var availableTags = [];
+                 var myDate = new Date();
+                 var newData = myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate(); 
+                 var wordArr = $('#sel_wordName').val();
+                 var word = "";
+                 if(wordArr!=null&&wordArr.length>0){
+                     for(var w in wordArr){
+                         if(word==""){
+                             word += wordArr[w];
+                         }else{
+                             word += "," + wordArr[w];
+                         }
+                     }
+                 }
+                 $.ajax({
+                     url : './queryHotTrendAnalysisChart',
+                     type : 'post', // 数据发送方式
+                     data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),wordList:word},
+                     success : function(data) {
+                         var wordList = [];
+                         var yearList = [];
+                         var chartData =[];
+                         for(var i=30-1;i>=0;i--){
+                             yearList.push(GetDateStr(-i));
+                         }
+                         for(var d in data){
+                             if(d=="remove"){
+                                 continue;
+                             }
+                             if(!isExist(wordList,data[d].wordName)){
+                                 wordList.push(data[d].wordName)
+                             }
+                         }
+                         for(var w in wordList){
+                             if(w=="remove"){
+                                 continue;
+                             }
+                             var dataArr = [];
+                             for(var y in yearList){
+                                 var isTrue = false;
+                                     for(var d in data){
+                                         if(d=="remove"){
+                                             continue;
+                                         }
+                                         if(wordList[w]==data[d].wordName&&yearList[y]==data[d].time){
+                                         if(yearList[y]==data[d].time){
+                                             isTrue = true;
+                                             break;
+                                         }
+                                     }
+                                 }
+                                 if(isTrue){
+                                     dataArr.push(data[d].frequencyCount);
+                                 }else{
+                                     dataArr.push(0);
+                                 }
+                             }
+                             var chartArr =  {
+                                     name:wordList[w],
+                                     type:'line',
+                                     smooth:true,
+                                     symbol: 'none',
+                                     sampling: 'average',
+                                     itemStyle: {
+                                         normal: {
+                                              color: '#3ec7f5'
+                                         }
+                                     },
+                                    areaStyle: {
+                                        normal: {
+                                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [ {
+                                                offset: 1,
+                                                color: 'rgba(62, 199, 245, 0.3)'
+                                            }])
+                                        }
+                                     },
+                                     data:dataArr
+                                 };
+                             chartData.push(chartArr);
+                         }
+                         optionList(wordList,yearList,chartData)
+                         chartInit();
+                     }
+                  });
+             }
          });
     });
-    function GetDateStr(AddDayCount) 
+    
+    function changeDate(){
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var wordName = $('#sel_wordName').val();
+        if(startDate==""){
+        	alert("请选择开始时间!")
+        	return
+        }
+        if(endDate==""){
+            alert("请选择结束时间!")
+            return
+        }
+        if(startDate>endDate){
+            alert("开始时间不能大于结束时间!")
+            return
+        }
+        if(wordName==""){
+        	alert("请选择关键词!")
+        	return
+        }
+        $("#askHtml").html("");
+        if(startDate!=""&&endDate!=""){
+            $.ajax({
+            url : './queryEveryoneAsk',
+            type : 'post', // 数据发送方式
+            data :{startDate:startDate,endDate:endDate},
+            success : function(data) {
+                var selwordNameHtml ="";
+                var index = 1;
+                for(var d in data){
+                    selwordNameHtml += '<option value="'+data[d].wordName+'">'+data[d].wordName+'</option>'
+                }
+                $("#sel_wordName").html(selwordNameHtml); 
+                $('#sel_wordName').multiselect('destroy')
+                $('#sel_wordName').multiselect({
+                    onChange: function(option, checked) {
+                        var selectedOptions = $('#sel_wordName option:selected');
+                        if (selectedOptions.length >= 5) {
+                            var nonSelectedOptions = $('#sel_wordName option').filter(function() {
+                                return !$(this).is(':selected');
+                            });
+         
+                            var dropdown = $('#sel_wordName').siblings('.multiselect-container');
+                            nonSelectedOptions.each(function() {
+                                var input = $('input[value="' + $(this).val() + '"]');
+                                input.prop('disabled', true);
+                                input.parent('li').addClass('disabled');
+                            });
+                        }
+                        else {
+                            // Enable all checkboxes.
+                            var dropdown = $('#sel_wordName').siblings('.multiselect-container');
+                            $('#sel_wordName option').each(function() {
+                                var input = $('input[value="' + $(this).val() + '"]');
+                                input.prop('disabled', false);
+                                input.parent('li').addClass('disabled');
+                            });
+                        }
+                    }
+                })
+            }
+        });
+        }else{
+            return;
+        }
+    }
+    
+    function GetDateStr(AddDayCount,date) 
     { 
-        var dd = new Date(); 
+    	var dd;
+        if(date!=""&&date!=undefined){
+            dd = new Date(date.replace(/-/g, "/")); 
+        }else{
+            dd = new Date(); 
+        }
         dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
         var y = dd.getFullYear(); 
         var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
@@ -373,80 +444,52 @@
             series: data
         };
     }
-    function addCop(){
-        $('#li'+copIndexArr[0]).removeClass("dsn");
-        copIndexArr.remove(copIndexArr[0]);
-        if($('.dsn').length==0){
-            $("#addCop").hide();
-        }
-    }
+   
     function serachInfo(day){
-        if(day!=""&&day!=undefined){
-            dayIndex = day;
-            $("#timeTxt").text("最近"+day+"天");
+    	var st = "";
+    	if(day!=""&&day!=undefined){
+    		dayIndex = day;
+    		st = GetDateStr(day*-1,$('#endDate').val());
+    		$('#startDate').val(st);
+    		$("#timeTxt").text("最近"+day+"天")
+    	}else{
+    		st = $('#startDate').val();
+    	}
+    	
+    	
+    	var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var wordArr = $('#sel_wordName').val();
+        if(startDate==""){
+            alert("请选择开始时间!")
+            return
+        }
+        if(endDate==""){
+            alert("请选择结束时间!")
+            return
+        }
+        if(startDate>endDate){
+            alert("开始时间不能大于结束时间!")
+            return
+        }
+        if(wordArr==null){
+            alert("请选择关键词!")
+            return
         }
         var word = "";
-        var word1 = $('#word1').val();
-        var word2 = $('#word2').val();
-        var word3 = $('#word3').val();
-        var word4 = $('#word4').val();
-        var word5 = $('#word5').val();
-        if(word1!=""){
-            if(word!=""){
-                word += "," + word1;
-            }else{
-                word += word1;
-            }
-        }else{
-            $('#li1').addClass("dsn");
-        }
-        if(word2!=""){
-            if(word!=""){
-                word += "," + word2;
-            }else{
-                word += word2;
-            }
-        }else{
-            $('#li2').addClass("dsn");
-            copIndexArr.push(2);
-        }
-        if(word3!=""){
-            if(word!=""){
-                word += "," + word3;
-            }else{
-                word += word3;
-            }
-        }else{
-            $('#li3').addClass("dsn");
-            copIndexArr.push(3);
-        }
-        if(word4!=""){
-            if(word!=""){
-                word += "," + word4;
-            }else{
-                word += word4;
-            }
-        }else{
-            $('#li4').addClass("dsn");
-            copIndexArr.push(4);
-        }
-        if(word5!=""){
-            if(word!=""){
-                word += "," + word5;
-            }else{
-                word += word5;
-            }
-        }else{
-            $('#li5').addClass("dsn");
-            copIndexArr.push(5);
-        }
-        if($('.dsn').length>0){
-            $("#addCop").show();
-        }
+    	if(wordArr!=null&&wordArr.length>0){
+    		for(var w in wordArr){
+    			if(word==""){
+    				word += wordArr[w];
+    			}else{
+    				word += "," + wordArr[w];
+    			}
+    		}
+    	}
         $.ajax({
             url : './queryHotTrendAnalysisChart',
             type : 'post', // 数据发送方式
-            data:{day:dayIndex,wordList:word},
+            data:{startDate:st,endDate:$('#endDate').val(),wordList:word},
             success : function(data) {
                 var wordList = [];
                 var yearList = [];
@@ -514,26 +557,6 @@
             }
          });
     }
-    function deleteCop(i){
-        $('#li'+i).addClass("dsn");
-        $('#word'+i).val("");
-        if($('.dsn').length>0){
-            $("#addCop").show();
-        }
-        copIndexArr.push(i);
-    }
-    Array.prototype.indexOf = function(val) {
-        for (var i = 0; i < this.length; i++) {
-        if (this[i] == val) return i;
-        }
-        return -1;
-    };
-    Array.prototype.remove = function(val) {
-        var index = this.indexOf(val);
-        if (index > -1) {
-        this.splice(index, 1);
-        }
-    };
 </script>
 </body>
 </div>

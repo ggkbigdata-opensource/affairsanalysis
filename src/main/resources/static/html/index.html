@@ -82,7 +82,7 @@
                         <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
                         </li>
                         <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
-                        <li><a class="ajax-link" href="#"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -119,16 +119,83 @@
                             </td>
                             <td width="34%">
                                 <div class="tip-item card-light">
-                                    <a href="./">
-                                        <div class="hd bdborder">
-                                            <span class="title clr-normal">词云</span>
-                                        </div>
-                                        <div class="bd">
-                                            <div class="graph" style="text-align: center;">
-                                                <img src="./js/home/xqtp_sj.jpg">
-                                            </div>
-                                        </div>
-                                    </a>
+	                                <div class="hd bdborder">
+	                                    <span class="title clr-normal">词云</span>
+	                                </div>
+	                                <div class="bd">
+			                                 <svg height="560" version="1.1" width="400">
+			                                     <a id ="a2" onclick="forPage(2)">
+                                                    <circle cx="45" cy="195" r="24" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="45" y="229" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.006694805270371" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan2"></tspan>
+                                                    </text>
+                                                 </a>
+                                                    
+                                                   <a id ="a1" onclick="forPage(1)">
+                                                    <circle cx="180" cy="192" r="26" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                                                    </circle>
+                                                    <text x="180" y="224" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.013560544359365" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan1"></tspan>
+                                                    </text>
+                                                   </a>
+                                                   
+                                                   <a id ="a3" onclick="forPage(3)">
+                                                    <circle cx="300" cy="100" r="22" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="300" y="130" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.009102209194282" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan3"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a4" onclick="forPage(4)">
+                                                    <circle cx="200" cy="260" r="20" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="200" y="289" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.000470514289816" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan4"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a5" onclick="forPage(5)">
+                                                    <circle cx="100" cy="265" r="18" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="100" y="290" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.010961427981783" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan5"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a6" onclick="forPage(6)">
+                                                    <circle cx="120" cy="150" r="16" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="120" y="175" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.011167637946755" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan6"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a7" onclick="forPage(7)">
+                                                    <circle cx="250" cy="158" r="14" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="250" y="180" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.011373780399651" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan7"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a8" onclick="forPage(8)">
+                                                    <circle cx="280" cy="240" r="12" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="280" y="260" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.005642439983774" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan8"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a9" onclick="forPage(9)">
+                                                    <circle cx="170" cy="90" r="10" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="170" y="110" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.005642439983774" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan9"></tspan>
+                                                    </text>
+                                                   </a>
+                                                    
+                                                   <a id ="a10" onclick="forPage(10)">
+                                                    <circle cx="350" cy="200" r="8" fill="#FE831D" stroke="#ffffff" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                                                    <text x="350" y="218" text-anchor="middle" font="12px &quot;Arial&quot;, &quot;Microsoft Yahei&quot;" stroke="none" fill="#333333" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, &quot;Microsoft Yahei&quot;;" font-size="12px">
+                                                        <tspan dy="4.005642439983774" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="tspan10"></tspan>
+                                                    </text>
+                                                   </a>
+                                                </svg>
+	                                </div>
                                 </div>
                             </td>
                             <td width="34%">
@@ -138,7 +205,6 @@
                                     </div>
                                     <div class="bd">
                                         <ol class="info-list" id ="askHtml">
-                                            
                                         </ol>
                                     </div>
                                 </div>
@@ -151,18 +217,41 @@
     </div>
     <script type="text/javascript">
         $(function(){
+        	var st = GetDateStr(-30,"");
+        	var et = GetDateStr(0,"");
             $.ajax({
                 url : './queryEveryoneAsk',
                 type : 'post', // 数据发送方式
+                data:{startDate:st,endDate:et},
                 success : function(data) {
                     var askHtml ="";
+                    var index = 1;
                     for(var d in data){
                         askHtml += '<li><span class="text-r">'+data[d].sumCount+'</span><a href="./hotTrendAnalysisChart?wordName='+data[d].wordName+'">'+data[d].wordName+'</a></li>'
+                        $('#tspan'+index).text(data[d].wordName);
+                        index++;
                     }
                     $("#askHtml").html(askHtml); 
                 }
             });
         });
+        function forPage(i){
+        	window.location.href="./hotTrendAnalysisChart?wordName="+$("#tspan"+i).text(); 
+        }
+        function GetDateStr(AddDayCount,date){ 
+        	var dd;
+        	if(date!=""&&date!=undefined){
+        		dd = new Date(date.replace(/-/g, "/")); 
+        	}else{
+        		dd = new Date(); 
+        	}
+            
+            dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+            var y = dd.getFullYear(); 
+            var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+            var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+            return y+"-"+m+"-"+d; 
+        }
     </script>
 </body>
 </div>

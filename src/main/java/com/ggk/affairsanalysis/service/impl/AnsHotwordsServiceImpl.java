@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ggk.affairsanalysis.dao.AnsHotwordsDao;
 import com.ggk.affairsanalysis.model.AnsHotwords;
+import com.ggk.affairsanalysis.model.AnsWorkorder;
 import com.ggk.affairsanalysis.service.AnsHotwordsService;
 
 @Component
@@ -26,12 +27,17 @@ public class AnsHotwordsServiceImpl implements AnsHotwordsService {
 	}
 	
 	@Override
-	public List<AnsHotwords> queryHotTrendAnalysisChart(int day,List<String> wordList) {
-		return ansHotwordsDao.queryHotTrendAnalysisChart(day,wordList);
+	public List<AnsHotwords> queryHotTrendAnalysisChart(String startDate,String endDate,List<String> wordList) {
+		return ansHotwordsDao.queryHotTrendAnalysisChart(startDate,endDate,wordList);
 	}
 	
 	@Override
-	public List<AnsHotwords> queryEveryoneAsk() {
-		return ansHotwordsDao.queryEveryoneAsk();
+	public List<AnsHotwords> queryEveryoneAsk(String startDate,String endDate) {
+		return ansHotwordsDao.queryEveryoneAsk(startDate,endDate);
+	}
+	
+	@Override
+	public List<AnsWorkorder> queryTraceabilityList(String wordName) {
+		return ansHotwordsDao.queryTraceabilityList(wordName);
 	}
 }

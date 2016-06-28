@@ -18,7 +18,7 @@
     <select id="queryHotTrendAnalysisChart" resultType="AnsHotwords">
        SELECT *,SUM(frequency_count) as sumCount FROM 
 	   tbl_ans_hotwords  
-	   WHERE statistical_date &gt;= adddate(curdate(), #{day}) AND statistical_date &lt;= date(NOW()) AND area = '' AND word_name in 
+	   WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate} AND area = '' AND word_name in 
 	   <foreach item="item" index="index" collection="wordList" open="(" separator="," close=")">  
 		  #{item} 
 	   </foreach>
@@ -28,9 +28,15 @@
     <select id="queryEveryoneAsk" resultType="AnsHotwords">
         SELECT a.*,SUM(frequency_count) sumCount
 		FROM tbl_ans_hotwords a
-		WHERE a.area = ''
+		WHERE a.area = '' AND statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate}
 		GROUP BY word_name 
 		ORDER BY sum(frequency_count) DESC LIMIT 10
+    </select>
+    
+     <select id="queryTraceabilityList" resultType="AnsWorkorder">
+        select b.* from tbl_ans_wo_hotwords a
+		left join tbl_ans_workorder b on a.wo_id = b.wo_id
+		where a.hotwords like  CONCAT('%','${wordName}','%' )  
     </select>
     
 </mapper>
