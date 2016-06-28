@@ -67,7 +67,7 @@
                          <li class="nav-header">模块</li>
                         <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
                         </li>
-                        <li class="active"><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
+                        <li class="active"><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
                         </li>
                         <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
                         <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
@@ -83,7 +83,7 @@
             <a href="/affairsanalysis">模块</a>
         </li>
         <li>
-            <a href="./hotChart">热力图</a>
+            <a href="./hotChart">热线分布图</a>
         </li>
     </ul>
 </div>
@@ -131,22 +131,87 @@
 var dataArr = [];
 var yearArr = [];
 $(function(){
-    $('#main').hide();
-    $('#subjectTD1').hide();
-    $('#subjectTD2').hide();
-    $('#subjectTD3').hide();
-    $('#replayID').hide();
+	$('.form_date').datetimepicker({
+	    language:  'zh-CN',
+	    weekStart: 1,
+	    todayBtn:  1,
+	    autoclose: 1,
+	    todayHighlight: 1,
+	    startView: 2,
+	    minView: 2,
+	    forceParse: 0
+	});
+	$('#startDate').val(GetDateStr(-30));
+	$('#endDate').val(GetDateStr(0));
+	var option ="";
+	$.ajax({
+        url : './querySubject',
+        type : 'post', // 数据发送方式
+        data:{startDate:$('#startDate').val(),endDate:$('#endDate').val()},
+        success : function(data) {
+            for(var d in data){
+                option += "<option value='"+data[d]+"'>"+data[d]+"</option>"; 
+            }
+            $('#sel_subject').html(option);
+            var startDate = $('#startDate').val(); //开始时间
+            var endDate = $('#endDate').val(); //结束时间
+            var subject =  $('#sel_subject').val(); //主题
+            if(startDate==""){
+                alert("请选择开始时间!");
+                return;
+            }
+            if(endDate==""){
+                alert("请选择结束时间!");
+                return;
+            }
+            if(endDate!=""&&endDate<startDate){
+                alert("结束时间不能小于开始时间!");
+                return;
+            }
+            if(subject==""){
+                alert("请选择主题!");
+                return;
+            }
+            if(endDate>startDate){
+                $('#replayID').show();
+            }
+           
+            $.ajax({
+                url : './queryMainChart',
+                type : 'post', // 数据发送方式
+                data:{startDate:startDate,endDate:endDate,subject:subject},
+                success : function(data) {
+                    dataArr = data;
+                    yearArr = [];
+                    var dateS = endDate; 
+                    for(var d in dataArr){
+                        if(dateS>d){
+                            dateS=d;
+                        }
+                        yearArr.push(d);
+                    }
+                    optionList(dataArr[dateS]);
+                    $('#main').show();
+                    chartInit();
+                }
+         });
+        }
+ });
 });
-$('.form_date').datetimepicker({
-    language:  'zh-CN',
-    weekStart: 1,
-    todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    minView: 2,
-    forceParse: 0
-});
+function GetDateStr(AddDayCount,date) 
+{ 
+    var dd;
+    if(date!=""&&date!=undefined){
+        dd = new Date(date.replace(/-/g, "/")); 
+    }else{
+        dd = new Date(); 
+    }
+    dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+    var y = dd.getFullYear(); 
+    var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+    var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+    return y+"-"+m+"-"+d; 
+}
 function changeDate(){
     var startDate = $('#startDate').val();
     var endDate = $('#endDate').val();

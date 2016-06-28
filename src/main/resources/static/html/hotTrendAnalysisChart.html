@@ -67,7 +67,7 @@
                        <li class="nav-header">模块</li>
                         <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
                         </li>
-                        <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热力图</span></a>
+                        <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
                         </li>
                         <li class="active"><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
                         <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
@@ -174,6 +174,7 @@
     var colorArr= ["#3ec7f5","#2cc312","#e7882e","#f362a5","#b16ec2"]
     var bgColorArr = ["rgba(62, 199, 245, 0.3)","rgba(44,195,18,0.3)","rgba(231, 136, 46, 0.3)","rgba(243, 98, 165, 0.3)","rgba(177, 110, 194, 0.3)"]
     $(function(){
+    	var pa = decodeURIComponent((location.search.substr(location.search.indexOf("=")+1)));
     	$("#startDate").val(GetDateStr(-30));
     	$("#endDate").val(GetDateStr(0));
     	$('.form_date').datetimepicker({
@@ -194,7 +195,11 @@
                  var selwordNameHtml ="";
                  var index = 1;
                  for(var d in data){
-                	 selwordNameHtml += '<option value="'+data[d].wordName+'">'+data[d].wordName+'</option>'
+                	 if(selwordNameHtml==""&&(pa==""||pa==undefined)){
+                		 selwordNameHtml += '<option value="'+data[d].wordName+'" selected ="selected">'+data[d].wordName+'</option>'
+                	 }else{
+                		 selwordNameHtml += '<option value="'+data[d].wordName+'">'+data[d].wordName+'</option>'
+                	 }
                  }
                  $("#sel_wordName").html(selwordNameHtml); 
                  $('#sel_wordName').multiselect({
