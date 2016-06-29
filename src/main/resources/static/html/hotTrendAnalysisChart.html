@@ -500,7 +500,7 @@
                 var yearList = [];
                 var chartData =[];
                 for(var i=dayIndex-1;i>=0;i--){
-                    yearList.push(GetDateStr(-i));
+                    yearList.push(GetDateStr(-i,$('#endDate').val()));
                 }
                 for(var d in data){ 
                     if(d=="remove"){
