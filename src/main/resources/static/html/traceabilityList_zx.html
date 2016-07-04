@@ -99,7 +99,7 @@ div.th-inner{
                         <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
                         </li>
                         <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
-                        <li class="active"><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
                         <li><a class="ajax-link" href="./rankList"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
                         <li class="nav-header hidden-md">咨询类</li>
                         <li><a class="ajax-link" href="./index_zx"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a></li>
@@ -115,10 +115,10 @@ div.th-inner{
             <div>
     <ul class="breadcrumb">
         <li>
-            <a href="/affairsanalysis">诉求类</a>
+            <a href="./index_zx">咨询类</a>
         </li>
         <li>
-            <a href="./traceabilityList">追溯来源</a>
+            <a href="./traceabilityList_zx">追溯来源</a>
         </li>
     </ul>
 </div>
@@ -177,7 +177,7 @@ div.th-inner{
 			 $.ajax({
                 url : './queryEveryoneAsk',
                 type : 'post', // 数据发送方式
-                data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:1},
+                data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:2},
                 success : function(data) {
                     var option = "";
                     var index = 1;
@@ -193,7 +193,7 @@ div.th-inner{
 			 $.ajax({
 	                url : './queryEveryoneAsk',
 	                type : 'post', // 数据发送方式
-	                data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:1},
+	                data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:2},
 	                success : function(data) {
 	                    var option = "";
 	                    var index = 1;
@@ -213,7 +213,7 @@ div.th-inner{
 			$('#searchResult').bootstrapTable('destroy');
 			$('#searchResult').bootstrapTable({
                 method : 'post',
-                url : './queryTraceabilityList?wordName='+wordName+'&startDate='+ $('#startDate').val()+'&endDate='+$('#endDate').val()+"&type=1",
+                url : './queryTraceabilityList?wordName='+wordName+'&startDate='+ $('#startDate').val()+'&endDate='+$('#endDate').val()+"&type=2",
                 striped : true,
                 pagination : true,
                 toolbar : '#toolbar',

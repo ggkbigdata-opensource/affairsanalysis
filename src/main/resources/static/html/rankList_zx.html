@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+ <meta charset="utf-8">
+    <title>广州市政府服务热线</title>
+    <link id="bs-css" href="./css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="./css/charisma-app.css" rel="stylesheet">
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='./bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='./bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='./bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='./bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='./bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='./css/jquery.noty.css' rel='stylesheet'>
+    <link href='./css/noty_theme_default.css' rel='stylesheet'>
+    <link href='./css/elfinder.min.css' rel='stylesheet'>
+    <link href='./css/elfinder.theme.css' rel='stylesheet'>
+    <link href='./css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='./css/uploadify.css' rel='stylesheet'>
+    <link href='./css/animate.min.css' rel='stylesheet'>
+    
+    <link href="./js/bootstrapDataTable/dataTables.bootstrap.css"
+    rel="stylesheet" type="text/css" />
+    <!-- jQuery -->
+    <script src="./bower_components/jquery/jquery.min.js"></script>
+    <script src="./js/lib/jquery/jquery.min.js"></script>
+    
+    <script src="./js/bootstrapDataTable/bootstrap-table.js"></script>
+<script src="./js/bootstrapDataTable/bootstrap-table-zh-CN.js"></script>
+<script
+    src="./js/bootstrapDataTable/bootstrap-table-export.js"></script>
+<script src="./js/bootstrapDataTable/tableExport.js"></script>
+    
+<link type="text/css" rel="stylesheet" href="./js/home/styles.css">
+<link rel="stylesheet" href="./js/home/tips.css">
+<script src="./js/bootstrap-datetimepicker.js"></script>
+    <script src="./js/bootstrap-datetimepicker.zh-CN.js"></script>
+   
+    <link href="./css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<style type="text/css">
+div.th-inner{
+    text-align:center;
+    min-width:100px;
+}
+.tip-group table {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tip-item {
+    display: block;
+    margin: 0 auto 50px auto;
+    width: 400px;
+    position: relative;
+    overflow: hidden;
+    height: 560px;
+}
+
+.tip-group {
+    padding-top: 0%;
+}
+</style>
+</head>
+
+<body>
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/affairsanalysis">
+                <span>政府服务热线</span></a>
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                </button>
+            </div>
+        </div>
+    </div>
+<div class="ch-container">
+    <div class="row">
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">诉求类</li>
+                        <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
+                        </li>
+                        <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li ><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li ><a class="ajax-link" href="./rankList"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
+                        <li class="nav-header hidden-md">咨询类</li>
+                        <li ><a class="ajax-link" href="./index_zx"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a></li>
+                        <li><a class="ajax-link" href="./hotTrendAnalysisChart_zx"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li ><a class="ajax-link" href="./traceabilityList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li class="active"><a class="ajax-link" href="./rankList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="col-lg-10 col-sm-10">
+            <!-- content starts -->
+            <div>
+    <ul class="breadcrumb">
+        <li>
+            <a href="./index_zx">咨询类</a>
+        </li>
+        <li>
+            <a href="./rankList_zx">排名列表</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+	<body class="page-index index-tips" style="height: 100%;">
+	 <div>
+	     <table>
+	         <tr>
+             <td style="width:20px"></td>
+             <td style="font-weight: bold;">时间:</td>
+             <td>
+                 <div class="input-group date form_date col-md-12" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input id= 'date' class="form-control" size="16" type="text" value=""  readonly >
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+             </td>
+             <td style="width:120px"></td>
+             <td>
+                 <button type="button"  id="search" class="btn btn-primary" onclick="searchInfo()">查询</button>
+             </td>
+              <td style="width:50px"></td>
+         </tr>
+	      </table>
+        <hr>
+        <table id="table1">
+            <tr>
+                <td style="width:33%">
+                    <h4>热点排名</h4> <br/>
+                    <div id="searchResult" class="  table-bordered"></div>
+                </td>
+                <td style="width:33%">
+                    <h4>热力变动上升排名</h4> <br/>
+                    <div id="searchResult1" class="  table-bordered"></div>
+                </td>
+                <td style="width:33%">
+                    <h4>热力变动下降排名</h4> <br/>
+                    <div id="searchResult2" class="  table-bordered"></div>
+                </td>
+            </tr>
+        </table>
+        </div>
+		<script type="text/javascript">
+		$(function(){
+			$('#table1').hide();
+			$('#date').val(GetDateStr(0));
+			$('.form_date').datetimepicker({
+			    language:  'zh-CN',
+			    weekStart: 1,
+			    todayBtn:  1,
+			    autoclose: 1,
+			    todayHighlight: 1,
+			    startView: 2,
+			    minView: 2,
+			    forceParse: 0
+			});
+		});
+		function searchInfo(){
+			$('#table1').show();
+			var date = $('#date').val();
+			$('#searchResult').bootstrapTable('destroy');
+			$('#searchResult1').bootstrapTable('destroy');
+			$('#searchResult2').bootstrapTable('destroy');
+			$('#searchResult').bootstrapTable({
+                method : 'post',
+                url : 'queryHotWordRank?newStartDate='+GetDateStr(-6,date)+'&newEndDate='+GetDateStr(0,date)+'&oldStartDate='+GetDateStr(-13,date)+'&oldEndDate='+GetDateStr(-7,date)+'&type=2',
+                striped : true,
+                pagination : true,
+                toolbar : '#toolbar',
+                pageSize : 10,
+                pageList : [ 10, 20, 50, 100, 500 ],
+                minimunCountColumns : 2,
+                exportDataType : "all",
+                columns : [ {
+                    field : 'wordName',
+                    title : '主题词',
+                    width : 700,
+                    align : 'left',
+                    valign : 'middle',
+                }, {
+                    field : 'sumCount',
+                    title : '频次',
+                    width : 300,
+                    align : 'left',
+                    valign : 'middle',
+                     formatter: function (value,row) {
+                        if(row.rose>0){
+                            return [ value +"   "
+                                      + '<i style="color:red;font-size:15px;font-family: Times"> ↑</i>' ]
+                            .join('');
+                        }
+                        if(row.rose==0){
+                        	return [ value+"   "
+                                     + '<i  style="font-size:15px;font-family: Times"> -</i>' ]
+                                     .join('');
+                        }
+                        if(row.rose<0){
+                        	return [ value+"   "
+                                     + '<i  style="color:green;font-size:15px;font-family: Times"> ↓</i>' ]
+                                     .join('');
+                        }
+                    }, 
+                }]
+            });
+			
+			$('#searchResult1').bootstrapTable({
+	            method : 'post',
+	            url : 'queryHotWordGoingUp?newStartDate='+GetDateStr(-6,date)+'&newEndDate='+GetDateStr(0,date)+'&oldStartDate='+GetDateStr(-13,date)+'&oldEndDate='+GetDateStr(-7,date)+'&type=2',
+	            striped : true,
+	            pagination : true,
+	            toolbar : '#toolbar',
+	            pageSize : 10,
+	            pageList : [ 10, 20, 50, 100, 500 ],
+	            minimunCountColumns : 2,
+	            exportDataType : "all",
+	            columns : [ {
+	                field : 'wordName',
+	                title : '主题词',
+	                width : 700,
+	                align : 'left',
+	                valign : 'middle',
+	            }, {
+	                field : 'sumCount',
+	                title : '频次',
+	                width : 300,
+	                align : 'left',
+	                valign : 'middle',
+	            }]
+	        });
+	    
+		    $('#searchResult2').bootstrapTable({
+		        method : 'post',
+		        url : 'queryHotWordDeclining?newStartDate='+GetDateStr(-6,date)+'&newEndDate='+GetDateStr(0,date)+'&oldStartDate='+GetDateStr(-13,date)+'&oldEndDate='+GetDateStr(-7,date)+'&type=2',
+		        striped : true,
+		        pagination : true,
+		        toolbar : '#toolbar',
+		        pageSize : 10,
+		        pageList : [ 10, 20, 50, 100, 500 ],
+		        minimunCountColumns : 2,
+		        exportDataType : "all",
+		        columns : [ {
+		            field : 'wordName',
+		            title : '主题词',
+		            width : 700,
+		            align : 'left',
+		            valign : 'middle',
+		        }, {
+		            field : 'sumCount',
+		            title : '频次',
+		            width : 300,
+		            align : 'left',
+		            valign : 'middle',
+		            /* formatter: function (value,row) {
+		                return "<a onclick='PopCompany("+row.enterpriseId+")'>"+value+"</a>";
+		            }, */
+		        }]
+		    });
+		}
+		function GetDateStr(AddDayCount,date) 
+	    { 
+	        var dd;
+	        if(date!=""&&date!=undefined){
+	            dd = new Date(date.replace(/-/g, "/")); 
+	        }else{
+	            dd = new Date(); 
+	        }
+	        dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
+	        var y = dd.getFullYear(); 
+	        var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0
+	        var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate(); //获取当前几号，不足10补0
+	        return y+"-"+m+"-"+d; 
+	    }
+		</script>
+	</body>
+</div>
+</div>
+</div>
+</div>
+<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- library for cookie management -->
+<script src="./js/jquery.cookie.js"></script>
+<!-- calender plugin -->
+<script src='./bower_components/moment/min/moment.min.js'></script>
+<script src='./bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- data table plugin -->
+<script src='./js/jquery.dataTables.min.js'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="./bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- plugin for gallery image view -->
+<script src="./bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- notification plugin -->
+<script src="./js/jquery.noty.js"></script>
+<!-- library for making tables responsive -->
+<script src="./bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="./bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- star rating plugin -->
+<script src="./js/jquery.raty.min.js"></script>
+<!-- for iOS style toggle switch -->
+<script src="./js/jquery.iphone.toggle.js"></script>
+<!-- autogrowing textarea plugin -->
+<script src="./js/jquery.autogrow-textarea.js"></script>
+<!-- multiple file upload plugin -->
+<script src="./js/jquery.uploadify-3.1.min.js"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="./js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="./js/charisma.js"></script>
+
+
+</body>
+</html>

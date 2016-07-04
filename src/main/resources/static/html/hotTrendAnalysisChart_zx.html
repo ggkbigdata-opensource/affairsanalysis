@@ -69,14 +69,15 @@
                         </li>
                         <li><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
                         </li>
-                        <li class="active"><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li ><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
                         <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
                         <li><a class="ajax-link" href="./rankList"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
                         <li class="nav-header hidden-md">咨询类</li>
-                        <li><a class="ajax-link" href="./index_zx"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a></li>
-                        <li><a class="ajax-link" href="./hotTrendAnalysisChart_zx"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li ><a class="ajax-link" href="./index_zx"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a></li>
+                        <li class="active"><a class="ajax-link" href="./hotTrendAnalysisChart_zx"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
                         <li><a class="ajax-link" href="./traceabilityList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
                         <li ><a class="ajax-link" href="./rankList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -86,10 +87,10 @@
             <div>
     <ul class="breadcrumb">
         <li>
-            <a href="/affairsanalysis">诉求类</a>
+            <a href="./index_zx">咨询类</a>
         </li>
         <li>
-            <a href="./hotTrendAnalysisChart">大家都在问</a>
+            <a href="./hotTrendAnalysisChart_zx">大家都在问</a>
         </li>
     </ul>
 </div>
@@ -201,7 +202,7 @@
     	 $.ajax({
              url : './queryEveryoneAsk',
              type : 'post', // 数据发送方式
-             data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:1},
+             data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:2},
              success : function(data) {
                  var selwordNameHtml ="";
                  var index = 1;
@@ -221,7 +222,7 @@
                 				 $.ajax({
                 		             url : './queryAllSubject',
                 		             type : 'post', // 数据发送方式
-                		             data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:1},
+                		             data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:2},
                 		             success : function(data) {
                 		            	 availableTags = data;
                 		            	 $('#wordInputTD').show();
@@ -281,7 +282,7 @@
                  $.ajax({
                      url : './queryHotTrendAnalysisChart',
                      type : 'post', // 数据发送方式
-                     data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),wordList:word,type:1},
+                     data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),wordList:word,type:2},
                      success : function(data) {
                          var wordList = [];
                          var yearList = [];
@@ -368,7 +369,7 @@
         	$.ajax({
                 url : './queryAllSubject',
                 type : 'post', // 数据发送方式
-                data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:1},
+                data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:2},
                 success : function(data) {
                     availableTags = data;
                     $("#wordInput").autocomplete({
@@ -379,7 +380,7 @@
             $.ajax({
             url : './queryEveryoneAsk',
             type : 'post', // 数据发送方式
-            data :{startDate:startDate,endDate:endDate,type:1},
+            data :{startDate:startDate,endDate:endDate,type:2},
             success : function(data) {
                 var selwordNameHtml ="";
                 var index = 1;
@@ -396,7 +397,7 @@
                                 $.ajax({
                                     url : './queryAllSubject',
                                     type : 'post', // 数据发送方式
-                                    data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:1},
+                                    data:{startDate:$("#startDate").val(),endDate:$("#endDate").val(),type:2},
                                     success : function(data) {
                                         availableTags = data;
                                         $('#wordInputTD').show();
@@ -556,7 +557,7 @@
         $.ajax({
             url : './queryHotTrendAnalysisChart',
             type : 'post', // 数据发送方式
-            data:{startDate:st,endDate:$('#endDate').val(),wordList:word,type:1},
+            data:{startDate:st,endDate:$('#endDate').val(),wordList:word,type:2},
             success : function(data) {
                 var wordList = [];
                 var yearList = [];

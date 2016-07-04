@@ -17,8 +17,13 @@ public class AnsHotwordsDaoImpl implements AnsHotwordsDao {
 	private AnsHotwordsMapper ansHotwordsMapper;
 
 	@Override
-	public List<AnsHotwords> queryAnsHotwords(String startDate,String endDate) {
-		return ansHotwordsMapper.queryAnsHotwords(startDate,endDate);
+	public List<AnsHotwords> querySubject(String startDate,String endDate,int type) {
+		return ansHotwordsMapper.querySubject(startDate,endDate, type);
+	}
+	
+	@Override
+	public List<AnsHotwords> queryAllSubject(String startDate,String endDate,int type) {
+		return ansHotwordsMapper.queryAllSubject(startDate,endDate, type);
 	}
 	
 	@Override
@@ -27,18 +32,38 @@ public class AnsHotwordsDaoImpl implements AnsHotwordsDao {
 	}
 	
 	@Override
-	public List<AnsHotwords> queryHotTrendAnalysisChart(String startDate,String endDate,List<String> wordList) {
-		return ansHotwordsMapper.queryHotTrendAnalysisChart(startDate,endDate,wordList);
+	public List<AnsHotwords> queryHotTrendAnalysisChart(String startDate,String endDate,List<String> wordList,int type) {
+		return ansHotwordsMapper.queryHotTrendAnalysisChart(startDate,endDate,wordList, type);
 	}
 	
 	@Override
-	public List<AnsHotwords> queryEveryoneAsk(String startDate,String endDate) {
-		return ansHotwordsMapper.queryEveryoneAsk(startDate,endDate);
+	public List<AnsHotwords> queryEveryoneAsk(String startDate,String endDate,int type) {
+		return ansHotwordsMapper.queryEveryoneAsk(startDate,endDate, type);
 	}
 	
 	@Override
-	public List<AnsWorkorder> queryTraceabilityList(String wordName) {
-		return ansHotwordsMapper.queryTraceabilityList(wordName);
+	public List<AnsWorkorder> queryTraceabilityList(String wordName,String startDate,String endDate,int type) {
+		return ansHotwordsMapper.queryTraceabilityList(wordName,startDate,endDate, type);
+	}
+	
+	@Override
+	public List<AnsHotwords> queryAreaWordName(String date,String areaName) {
+		return ansHotwordsMapper.queryAreaWordName(date,areaName);
+	}
+	
+	@Override
+	public List<AnsHotwords> queryHotWordRank(String newStartDate,String newEndDate,String oldStartDate,String oldEndDate,int type) {
+		return ansHotwordsMapper.queryHotWordRank(newStartDate,newEndDate,oldStartDate,oldEndDate, type);
+	}
+	
+	@Override
+	public List<AnsHotwords> queryHotWordGoingUp(String newStartDate,String newEndDate,String oldStartDate,String oldEndDate,int type) {
+		return ansHotwordsMapper.queryHotWordGoingUp(newStartDate,newEndDate,oldStartDate,oldEndDate, type);
+	}
+	
+	@Override
+	public List<AnsHotwords> queryHotWordDeclining(String newStartDate,String newEndDate,String oldStartDate,String oldEndDate,int type) {
+		return ansHotwordsMapper.queryHotWordDeclining(newStartDate,newEndDate,oldStartDate,oldEndDate, type);
 	}
 
 }

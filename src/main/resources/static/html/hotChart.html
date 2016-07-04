@@ -34,6 +34,18 @@
     <link type="text/css" rel="stylesheet" href="./js/home/styles.css">
     <link rel="stylesheet" href="./js/home/tips.css">
     <!-- <link href="./css/bootstrap-theme.min.css" rel="stylesheet" media="screen"> -->
+    <link type="text/css" rel="stylesheet" href="./js/home/styles.css">
+    <link rel="stylesheet" href="./js/home/tips.css">
+    
+<style type="text/css">
+.tip-item {
+    display: block;
+    margin: 0 auto 50px auto;
+    position: relative;
+    overflow: hidden;
+    height: 480px;
+}
+</style>
 </head>
 
 <body>
@@ -64,13 +76,20 @@
 
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
-                         <li class="nav-header">模块</li>
+                         <li class="nav-header">诉求类</li>
                         <li><a class="ajax-link" href="/affairsanalysis"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a>
                         </li>
                         <li class="active"><a class="ajax-link" href="./hotChart"><i class="glyphicon glyphicon-eye-open"></i><span> 热线分布图</span></a>
                         </li>
                         <li><a class="ajax-link" href="./hotTrendAnalysisChart"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
                         <li><a class="ajax-link" href="./traceabilityList"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li><a class="ajax-link" href="./rankList"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
+                        <li class="nav-header hidden-md">咨询类</li>
+                        <li ><a class="ajax-link" href="./index_zx"><i class="glyphicon glyphicon-home"></i><span> 首页</span></a></li>
+                        <li><a class="ajax-link" href="./hotTrendAnalysisChart_zx"><i class="glyphicon glyphicon-edit"></i><span> 大家都在问</span></a></li>
+                        <li><a class="ajax-link" href="./traceabilityList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 追溯来源</span></a></li>
+                        <li ><a class="ajax-link" href="./rankList_zx"><i class="glyphicon glyphicon-list-alt"></i><span> 排名列表</span></a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -80,7 +99,7 @@
             <div>
     <ul class="breadcrumb">
         <li>
-            <a href="/affairsanalysis">模块</a>
+            <a href="/affairsanalysis">诉求类</a>
         </li>
         <li>
             <a href="./hotChart">热线分布图</a>
@@ -109,7 +128,7 @@
                 </div>
              </td>
              <td style="width:120px" id="subjectTD1"></td>
-             <td style="font-weight: bold;" id="subjectTD2">主题:</td>
+             <td style="font-weight: bold;" id="subjectTD2">主题词:</td>
              <td id="subjectTD3">
                  <select class="form-control" id="sel_subject" >
                      <option value=''>-请选择-</option> 
@@ -126,11 +145,23 @@
          </tr>
     </table>
     <hr>
-    <div id="main" style="width:100%;height:620px;"></div>
+    <div id="main" style="width:70%;height:620px;float:left; " align="left" hidden="true"></div>
+    <div  style="width:30%;float:left" id="messageDiv">
+       <div class="tip-item card-deep bg-orange">
+            <div class="hd">
+                <span class="title" id="areaSpan"></span>
+            </div>
+            <div class="bd">
+                <ol class="info-list" id ="askHtml">
+                </ol>
+            </div>
+        </div>
+    </div>
 <script type="text/javascript">
 var dataArr = [];
 var yearArr = [];
 $(function(){
+	$('#messageDiv').hide();
 	$('.form_date').datetimepicker({
 	    language:  'zh-CN',
 	    weekStart: 1,
@@ -147,10 +178,10 @@ $(function(){
 	$.ajax({
         url : './querySubject',
         type : 'post', // 数据发送方式
-        data:{startDate:$('#startDate').val(),endDate:$('#endDate').val()},
+        data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:1},
         success : function(data) {
             for(var d in data){
-                option += "<option value='"+data[d]+"'>"+data[d]+"</option>"; 
+                option += "<option value='"+data[d].wordName+"'>"+data[d].wordName+"</option>"; 
             }
             $('#sel_subject').html(option);
             var startDate = $('#startDate').val(); //开始时间
@@ -175,7 +206,6 @@ $(function(){
             if(endDate>startDate){
                 $('#replayID').show();
             }
-           
             $.ajax({
                 url : './queryMainChart',
                 type : 'post', // 数据发送方式
@@ -223,10 +253,10 @@ function changeDate(){
         $.ajax({
                url : './querySubject',
                type : 'post', // 数据发送方式
-               data:{startDate:startDate,endDate:endDate},
+               data:{startDate:startDate,endDate:endDate,type:1},
                success : function(data) {
                    for(var d in data){
-                       option += "<option value='"+data[d]+"'>"+data[d]+"</option>"; 
+                       option += "<option value='"+data[d].wordName+"'>"+data[d].wordName+"</option>"; 
                    }
                    $('#sel_subject').html(option);
                }
@@ -268,11 +298,17 @@ function searchInfo(){
             dataArr = data;
             yearArr = [];
             var dateS = endDate; 
-            for(var d in dataArr){
+            for(var d in data){
                 if(dateS>d){
                     dateS=d;
                 }
                 yearArr.push(d);
+                if(data[d].area=="从化区"){
+                	data[d].area = "从化市"
+                }
+                if(data[d].area=="增城区"){
+                    data[d].area = "增城市"
+                }
             }
             optionList(dataArr[dateS]);
             $('#main').show();
@@ -283,6 +319,31 @@ function searchInfo(){
 function chartInit(){
      var myChart = echarts.init(document.getElementById('main'));
      myChart.setOption(option);
+     myChart.on('mouseover', function (param){
+         var areaName = param.name;
+         $('#areaSpan').text(areaName);
+         $('#messageDiv').show();
+         var date = yearArr[0];
+         $.ajax({
+             url : './queryAreaWordName',
+             type : 'post', // 数据发送方式
+             data:{date:date,areaName:areaName},
+             success : function(data) {
+                 var askHtml ="";
+                 var index = 1;
+                 for(var d in data){
+                     askHtml += '<li><span class="text-r">'+data[d].sumCount+'</span><a href="./hotTrendAnalysisChart?wordName='+data[d].wordName+'">'+data[d].wordName+'</a></li>'
+                     $('#tspan'+index).text(data[d].wordName);
+                     index++;
+                 }
+                 $("#askHtml").html(askHtml); 
+             }
+         });
+     });
+     myChart.on('mouseout', function (param){
+    	 $('#messageDiv').hide();
+     });
+     
 }
 var geoCoordMap = {
         "从化市":[113.59286,23.554007],
@@ -303,7 +364,7 @@ var geoCoordMap = {
         for (var i = 0; i < data.length; i++) {
             var geoCoord = geoCoordMap[data[i].area];
             if (geoCoord) {
-                res.push(geoCoord.concat(data[i].frequencyCount));
+                res.push(geoCoord.concat(data[i].sumCount));
             }
         }
         return res;
@@ -330,7 +391,7 @@ function optionList(dataArr,max){
         backgroundColor: '#ECF1F3',
         visualMap: {
             min: 0,
-            max: 1200,
+            max: 150,
             splitNumber: 5,
             inRange: {
                 color: ['#d94e5d','#eac736','#50a3ba'].reverse()

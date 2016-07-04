@@ -17,9 +17,15 @@ public class AnsHotwords {
 	//自定义属性
 	private BigDecimal sumCount; //时间区间内,各关键字总频次
 	private String time; //
+	private BigDecimal rose;
 	
 	
-	
+	public BigDecimal getRose() {
+		return rose;
+	}
+	public void setRose(BigDecimal rose) {
+		this.rose = rose;
+	}
 	public String getTime() {
 		return time;
 	}
