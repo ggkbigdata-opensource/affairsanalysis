@@ -175,7 +175,7 @@ $(function(){
 	$('#startDate').val(GetDateStr(-30));
 	$('#endDate').val(GetDateStr(0));
 	var option ="";
-	$.ajax({
+	$.ajax({//初始化页面：通过已选择的时间返回相应的主题词选择项
         url : './querySubject',
         type : 'post', // 数据发送方式
         data:{startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:1},
@@ -303,14 +303,8 @@ function searchInfo(){
                     dateS=d;
                 }
                 yearArr.push(d);
-                if(data[d].area=="从化区"){
-                	data[d].area = "从化市"
-                }
-                if(data[d].area=="增城区"){
-                    data[d].area = "增城市"
-                }
             }
-            optionList(dataArr[dateS]);
+            optionList(data[dateS]);
             $('#main').show();
             chartInit();
         }
@@ -321,6 +315,8 @@ function chartInit(){
      myChart.setOption(option);
      myChart.on('mouseover', function (param){
          var areaName = param.name;
+         if(areaName == '从化市') areaName = '从化区';
+         if(areaName == '增城市') areaName = '增城区';
          $('#areaSpan').text(areaName);
          $('#messageDiv').show();
          var date = yearArr[0];
@@ -346,9 +342,9 @@ function chartInit(){
      
 }
 var geoCoordMap = {
-        "从化市":[113.59286,23.554007],
+        "从化区":[113.59286,23.554007],
         "花都区":[113.226783,23.409758],
-        "增城市":[113.707065,23.331931],
+        "增城区":[113.707065,23.331931],
         "白云区":[113.345156,23.298611],
         "萝岗区":[113.487145,23.187259],
         "荔湾区":[113.227586,23.104229],
