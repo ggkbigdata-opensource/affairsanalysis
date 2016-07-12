@@ -254,7 +254,6 @@
                              });
                          }
                          else {
-                             // Enable all checkboxes.
                              var dropdown = $('#sel_wordName').siblings('.multiselect-container');
                              $('#sel_wordName option').each(function() {
                                  var input = $('input[value="' + $(this).val() + '"]');
@@ -264,8 +263,7 @@
                          }
                      },
                      maxHeight: 400,
-                     /*  dropUp: true */
-                      enableFiltering: true,
+                     enableFiltering: true,
                  })
                  $('#sel_wordName').multiselect('select', [decodeURIComponent((location.search.substr(location.search.indexOf("=")+1)))]);
                  

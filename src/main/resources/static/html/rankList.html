@@ -144,7 +144,7 @@ div.th-inner{
          </tr>
 	      </table>
         <hr>
-        <table id="table1">
+        <table id="table1" hidden = "true">
             <tr>
                 <td style="width:33%">
                     <h4>热点排名</h4> <br/>
@@ -242,12 +242,15 @@ div.th-inner{
 	                valign : 'middle',
 	            }, {
 	                field : 'rose',
-	                title : '上升速率',
+	                title : '上升速率(%)',
 	                width : 300,
 	                align : 'left',
 	                valign : 'middle',
 	                formatter: function (value,row) {
-                        return value*100;
+	                	if (value != undefined && value != "NaN" && value != "" && value != NaN)
+	                        return (parseFloat(value)*100).toFixed(2);
+	                    else
+	                        return (0.0).toFixed(2);
                     },
 	            }]
 	        });
@@ -270,12 +273,15 @@ div.th-inner{
 		            valign : 'middle',
 		        }, {
 		            field : 'rose',
-		            title : '下降速率',
+		            title : '下降速率(%)',
 		            width : 300,
 		            align : 'left',
 		            valign : 'middle',
 		             formatter: function (value,row) {
-		                return value*100;
+		            	 if (value != undefined && value != "NaN" && value != "" && value != NaN)
+	                            return (parseFloat(value)*100).toFixed(2);
+	                        else
+	                            return (0.0).toFixed(2);
 		            },
 		        }]
 		    });
