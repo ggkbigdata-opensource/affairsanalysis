@@ -131,7 +131,7 @@
     <select id="queryHotWordGoingUp" resultType="AnsHotwords">
         SELECT a.*,b.sumCount as sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) as rose  FROM tbl_ans_hotwords a
 		INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-		WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;= #{oldEndDate}
+		WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;= #{newEndDate}
 		<if test="type == 1">
           AND type &lt;&gt; '咨询'
         </if>
@@ -157,7 +157,7 @@
     <select id="queryHotWordDeclining" resultType="AnsHotwords">
         SELECT a.*,b.sumCount as sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) as rose  FROM tbl_ans_hotwords a
         INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-        WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;= #{oldEndDate}
+        WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;= #{newEndDate}
         <if test="type == 1">
           AND type &lt;&gt; '咨询'
         </if>

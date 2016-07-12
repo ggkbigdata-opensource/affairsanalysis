@@ -241,11 +241,14 @@ div.th-inner{
 	                align : 'left',
 	                valign : 'middle',
 	            }, {
-	                field : 'sumCount',
-	                title : '频次',
+	                field : 'rose',
+	                title : '上升速率',
 	                width : 300,
 	                align : 'left',
 	                valign : 'middle',
+	                formatter: function (value,row) {
+                        return value*100;
+                    },
 	            }]
 	        });
 	    
@@ -266,14 +269,14 @@ div.th-inner{
 		            align : 'left',
 		            valign : 'middle',
 		        }, {
-		            field : 'sumCount',
-		            title : '频次',
+		            field : 'rose',
+		            title : '下降速率',
 		            width : 300,
 		            align : 'left',
 		            valign : 'middle',
-		            /* formatter: function (value,row) {
-		                return "<a onclick='PopCompany("+row.enterpriseId+")'>"+value+"</a>";
-		            }, */
+		             formatter: function (value,row) {
+		                return value*100;
+		            },
 		        }]
 		    });
 		}
