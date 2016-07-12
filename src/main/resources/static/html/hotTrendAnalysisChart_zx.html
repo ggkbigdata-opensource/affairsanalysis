@@ -366,6 +366,8 @@
         	return
         }
         $("#askHtml").html("");
+        $('#wordInputTD').hide();
+        $('#wordInput').val("");
         if(startDate!=""&&endDate!=""){
         	$.ajax({
                 url : './queryAllSubject',
