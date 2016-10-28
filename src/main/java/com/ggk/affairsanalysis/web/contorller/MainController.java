@@ -1,6 +1,5 @@
 package com.ggk.affairsanalysis.web.contorller;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -182,11 +181,13 @@ public class MainController {
   //查询追溯列表
     @RequestMapping(value = "/queryTraceabilityList")
     public List<AnsWorkorder> queryTraceabilityList(String wordName,String startDate,String endDate,int type ) {
-    	try {
+    	/*try {
     		wordName = new String( wordName.getBytes("ISO-8859-1") , "UTF-8");  
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		} 
+		} */
+        System.out.println(startDate);
+        System.out.println(endDate);
     	List<AnsWorkorder> list = ansHotwordsService.queryTraceabilityList(wordName,startDate,endDate,type);
     	return list;
     }

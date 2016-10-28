@@ -60,3 +60,36 @@ create table tbl_ans_workorder
    primary key (wo_id)
 );
 
+INSERT INTO tbl_ans_workorder (wo_id,call_date,phone,
+wo_register_date,appeal_src,wo_type,wo_status,
+appeal_title,appeal_subject,appeal_depart_name,incident_site_large_area,incident_site_small_area,migrate_date
+ )
+ select INST_ID as wo_id, 
+    date_format(REGISTER_DATE,'%Y-%m-%d') as call_date,
+    CUSTOMER_CALLER as phone,
+    REGISTER_DATE as wo_register_date,
+    REQUEST_FROM as appeal_src,
+    ORDER_TYPE as wo_type,
+    ORDER_STATUS as wo_status,
+    REQUEST_TOPIC as appeal_title,
+    REQUEST_CONTENT as appeal_subject,
+    REQUEST_DEPTNAME as appeal_depart_name,
+    SUBJECT_ADDR as incident_site_large_area,
+    REQUEST_AREA as incident_site_small_area,
+    DISPATCH_DATE as migrate_date
+ from gz12345 limit 10;
+ 
+ CREATE VIEW tbl_ans_workorder AS select INST_ID as wo_id, 
+    date_format(REGISTER_DATE,'%Y-%m-%d') as call_date,
+    CUSTOMER_CALLER as phone,
+    REGISTER_DATE as wo_register_date,
+    REQUEST_FROM as appeal_src,
+    ORDER_TYPE as wo_type,
+    ORDER_STATUS as wo_status,
+    REQUEST_TOPIC as appeal_title,
+    REQUEST_CONTENT as appeal_subject,
+    REQUEST_DEPTNAME as appeal_depart_name,
+    SUBJECT_ADDR as incident_site_large_area,
+    REQUEST_AREA as incident_site_small_area,
+    DISPATCH_DATE as migrate_date
+ from gz12345;

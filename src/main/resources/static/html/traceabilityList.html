@@ -211,9 +211,20 @@ div.th-inner{
 				return
 			}
 			$('#searchResult').bootstrapTable('destroy');
+			info();
+			  $.ajax({
+                  url : './queryTraceabilityList',
+                  type : 'post', // 数据发送方式
+                  data:{wordName:wordName,startDate:$('#startDate').val(),endDate:$('#endDate').val(),type:1},
+                  success : function(data) {
+                	  $("#searchResult").bootstrapTable("load", data);
+                	  }
+                  });
+		}
+		function info(){
 			$('#searchResult').bootstrapTable({
-                method : 'post',
-                url : './queryTraceabilityList?wordName='+wordName+'&startDate='+ $('#startDate').val()+'&endDate='+$('#endDate').val()+"&type=1",
+                method : 'get',
+                url : '#',
                 striped : true,
                 pagination : true,
                 toolbar : '#toolbar',
@@ -222,7 +233,7 @@ div.th-inner{
                 minimunCountColumns : 2,
                 exportDataType : "all",
                 columns : [ {
-                    field : 'callId',
+                    field : 'woID',
                     title : '呼叫编号',
                     width : 300,
                     align : 'left',
@@ -234,10 +245,10 @@ div.th-inner{
                     align : 'left',
                     valign : 'middle',
                     formatter: function (value,row) {
-                    	var d = new Date(value);
-                    	var year=d.getFullYear();
-                    	var day=d.getDate();
-                    	var month=d.getMonth()+1;
+                        var d = new Date(value);
+                        var year=d.getFullYear();
+                        var day=d.getDate();
+                        var month=d.getMonth()+1;
                         return year+"-"+month+"-"+day;
                      }, 
                 }, {
@@ -246,16 +257,7 @@ div.th-inner{
                     width : 300,
                     align : 'left',
                     valign : 'middle',
-	                /* formatter: function (value,row) {
-	                    return "<a onclick='PopCompany("+row.enterpriseId+")'>"+value+"</a>";
-	                }, */
-                }, {
-                    field : 'phoneHome',
-                    title : '来电归属',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
+                },{
                     field : 'woRegisterDate',
                     title : '登记时间',
                     width : 300,
@@ -280,18 +282,6 @@ div.th-inner{
                     align : 'left',
                     valign : 'middle',
                 }, {
-                    field : 'appealClassification',
-                    title : '性质分类',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'appealLevel',
-                    title : '诉求级别',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
                     field : 'appealTitle',
                     title : '诉求标题',
                     width : 300,
@@ -302,12 +292,6 @@ div.th-inner{
                     title : '诉求主题',
                     width : 300,
                     align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'appealDepartNo',
-                    title : '被诉求部门编号',
-                    width : 300,
-                    align : 'center',
                     valign : 'middle',
                 }, {
                     field : 'appealDepartName',
@@ -324,54 +308,6 @@ div.th-inner{
                 }, {
                     field : 'incidentSiteSmallArea',
                     title : '是否地点小区',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'monitorStatus',
-                    title : '监察状态',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'woDeadline',
-                    title : '最后处理期限',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'woDealLastDate',
-                    title : '最后处理日期',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'preAlarmDay',
-                    title : '预警天数',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'alarmDay',
-                    title : '告警天数',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'satisfaction',
-                    title : '满意度',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'woCloseDate',
-                    title : '工单关闭时间',
-                    width : 300,
-                    align : 'left',
-                    valign : 'middle',
-                }, {
-                    field : 'remarks',
-                    title : '工单备注',
                     width : 300,
                     align : 'left',
                     valign : 'middle',

@@ -43,6 +43,7 @@ public class AnsHotwordsDaoImpl implements AnsHotwordsDao {
 	
 	@Override
 	public List<AnsWorkorder> queryTraceabilityList(String wordName,String startDate,String endDate,int type) {
+	    System.out.println(startDate + "\t" + endDate);
 		return ansHotwordsMapper.queryTraceabilityList(wordName,startDate,endDate, type);
 	}
 	

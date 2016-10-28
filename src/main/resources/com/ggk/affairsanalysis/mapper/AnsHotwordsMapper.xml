@@ -2,182 +2,229 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ggk.affairsanalysis.mapper.AnsHotwordsMapper">
-	<select id="querySubject" resultType="AnsHotwords">
-		SELECT *, sum(frequency_count) as sumCount
-		FROM tbl_ans_hotwords 
-		WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate} 
-		<if test="type == 1">
-		  AND type &lt;&gt; '咨询'
-		</if>
-		<if test="type == 2">
-          AND type = '咨询'
+    <select id="querySubject" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT *, sum(frequency_count) as sumCount
+        FROM tbl_ans_hotwords_sum
+        WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;=
+        #{endDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
         </if>
-		GROUP BY word_name 
-		ORDER BY sum(frequency_count) DESC LIMIT 10
-	</select>
-	<select id="queryMainChart" resultType="AnsHotwords">
-       SELECT *,SUM(frequency_count) as sumCount FROM 
-       tbl_ans_hotwords  
-       WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate} AND word_name = #{subject}  AND type &lt;&gt; '咨询'
-       AND area not like '%|%' AND (area like '%区%' OR area like '%市%') AND area not like '%广州%'
-       GROUP BY area,statistical_date
-       ORDER BY statistical_date ASC
+        <if test="type == 2">
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
+        ORDER BY sum(frequency_count) DESC LIMIT 10
     </select>
-    <select id="queryHotTrendAnalysisChart" resultType="AnsHotwords">
+    
+    <select id="queryMainChart" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT *,SUM(frequency_count) as sumCount FROM
+        tbl_ans_hotwords
+        WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;=
+        #{endDate} AND word_name = #{subject} AND type &lt;&gt; '咨询'
+        AND area not like '%|%' AND (area like '%区%' OR area like '%市%') AND area
+        not like '%广州%'
+        GROUP BY area,statistical_date
+        ORDER BY statistical_date ASC
+    </select>
+    
+    <select id="queryHotTrendAnalysisChart" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
         SELECT *
-		from
-		(
-		select t1.*,(select count(*)+1 from(SELECT word_name,statistical_date,sum(frequency_count) as sumCount FROM tbl_ans_hotwords 
-		<if test="type == 1">
-          WHERE type &lt;&gt; '咨询'
+        from
+        (
+        select t1.*,(select count(*)+1 from(SELECT
+        word_name,statistical_date,sum(frequency_count) as sumCount FROM
+        tbl_ans_hotwords where 1 =1 
+        <if test="type == 1">
+            and type &lt;&gt; '咨询'
         </if>
         <if test="type == 2">
-          WHERE type = '咨询'
+            and  type = '咨询'
         </if>
-		GROUP BY statistical_date,word_name
-		ORDER BY statistical_date,sum(frequency_count) desc) a1 where a1.statistical_date=t1.statistical_date and a1.sumCount>t1.sumCount) as group_id
-		from (SELECT word_name,statistical_date,sum(frequency_count) as sumCount FROM tbl_ans_hotwords 
-		<if test="type == 1">
-          WHERE type &lt;&gt; '咨询'
+        and  statistical_date &gt;= #{startDate} and
+        statistical_date &lt;= #{endDate}
+        GROUP BY statistical_date,word_name
+        ORDER BY
+        statistical_date,sum(frequency_count) desc) a1 where
+        a1.statistical_date=t1.statistical_date and a1.sumCount>t1.sumCount)
+        as group_id
+        from (SELECT
+        word_name,statistical_date,sum(frequency_count) as sumCount FROM
+        tbl_ans_hotwords where 1 = 1
+        <if test="type == 1">
+            and type &lt;&gt; '咨询'
         </if>
         <if test="type == 2">
-          WHERE type = '咨询'
+            and type = '咨询'
         </if>
-		GROUP BY statistical_date,word_name
-		ORDER BY statistical_date,sum(frequency_count) desc)t1
-		) a
-		where a.group_id &lt;=10 and a.statistical_date &gt;= #{startDate} and a.statistical_date &lt;= #{endDate} and a.word_name in 
-        <foreach item="item" index="index" collection="wordList" open="(" separator="," close=")">  
-          #{item} 
+        and  statistical_date &gt;= #{startDate} and
+        statistical_date &lt;= #{endDate}
+        GROUP BY statistical_date,word_name
+        ORDER BY
+        statistical_date,sum(frequency_count) desc)t1
+        ) a
+        where a.group_id
+        &lt;=10 and a.word_name in
+        <foreach item="item" index="index" collection="wordList" open="("
+            separator="," close=")">
+            #{item}
         </foreach>
     </select>
-    <select id="queryEveryoneAsk" resultType="AnsHotwords">
-        select DISTINCT a.word_name
-		From
-		(
-		select t1.*,(select count(*)+1 from(SELECT word_name,statistical_date,sum(frequency_count) as sumCount FROM tbl_ans_hotwords 
-		<if test="type == 1">
-          WHERE type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          WHERE type = '咨询'
-        </if>
-		GROUP BY statistical_date,word_name
-		ORDER BY statistical_date,sum(frequency_count) desc) a1 where a1.statistical_date=t1.statistical_date and a1.sumCount>t1.sumCount) as group_id
-		from (SELECT word_name,statistical_date,sum(frequency_count) as sumCount FROM tbl_ans_hotwords 
-		<if test="type == 1">
-          WHERE type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          WHERE type = '咨询'
-        </if>
-		GROUP BY statistical_date,word_name
-		ORDER BY statistical_date,sum(frequency_count) desc)t1
-		) a
-		where a.group_id &lt;=10 and a.statistical_date &gt;= #{startDate} AND a.statistical_date &lt;= #{endDate}
-    </select>
-    
-     <select id="queryTraceabilityList" resultType="AnsWorkorder">
-        select b.* from tbl_ans_wo_hotwords a
-		left join tbl_ans_workorder b on a.wo_id = b.wo_id
-		where a.hotwords like  CONCAT('%','${wordName}','%' )  and b.call_date &gt;= #{startDate} and b.call_date  &lt;= #{endDate}
-    </select>
-    
-    <select id="queryAreaWordName" resultType="AnsHotwords">
-        SELECT *,SUM(frequency_count) as sumCount FROM 
-		tbl_ans_hotwords  
-		WHERE statistical_date like CONCAT('%','${date}','%' ) AND area = #{areaName}
-		GROUP BY area,word_name
-		ORDER BY sum(frequency_count) DESC LIMIT 10
-    </select>
-    <select id="queryAllSubject" resultType="string">
-        SELECT word_name 
-        FROM tbl_ans_hotwords 
-        WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate}
+    <select id="queryEveryoneAsk" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT word_name FROM (SELECT word_name, COUNT(word_name) AS COUNT_VALUE
+        FROM tbl_ans_hotwords WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;= #{endDate}
         <if test="type == 1">
-          AND type &lt;&gt; '咨询'
+          and type &lt;&gt; '咨询'
         </if>
         <if test="type == 2">
-          AND type = '咨询'
+          and type = '咨询'
         </if>
-        GROUP BY word_name 
+        
+        GROUP BY word_name
+        ORDER BY COUNT_VALUE DESC ) A LIMIT 10;
+    </select>
+
+    <select id="queryTraceabilityList" resultType="com.ggk.affairsanalysis.model.AnsWorkorder">
+        select b.* from tbl_ans_wo_hotwords a
+        left join tbl_ans_workorder b on
+        a.wo_id = b.wo_id
+        where b.call_date &gt;= #{startDate} and b.call_date &lt;= #{endDate}
+        <if test="type == 1">
+          and b.wo_type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+          and b.wo_type = '咨询'
+        </if>
+        and a.hotwords = #{wordName}
+    </select>
+
+    <select id="queryAreaWordName" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT *,SUM(frequency_count) as sumCount FROM
+        tbl_ans_hotwords
+        WHERE statistical_date like CONCAT('%','${date}','%' ) AND area =
+        #{areaName}
+        GROUP BY area,word_name
+        ORDER BY sum(frequency_count) DESC
+        LIMIT 10
+    </select>
+    <select id="queryAllSubject" resultType="java.lang.String">
+        SELECT word_name
+        FROM tbl_ans_hotwords
+        WHERE statistical_date &gt;= #{startDate} AND statistical_date &lt;=
+        #{endDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
         ORDER BY sum(frequency_count) DESC
     </select>
-    <select id="queryHotWordRank" resultType="AnsHotwords">
-        SELECT a.*,b.sumCount as sumCount,IF(ISNULL(b.sumCount),0,b.sumCount)-IF(ISNULL(c.sumCount),0,c.sumCount) as rose  FROM tbl_ans_hotwords a
-		INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-		WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;= #{newEndDate}
-		<if test="type == 1">
-          AND type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          AND type = '咨询'
-        </if>
-		GROUP BY word_name
-		ORDER BY SUM(frequency_count))b on a.id = b.id
-		LEFT JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-		WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;= #{oldEndDate}
-		<if test="type == 1">
-          AND type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          AND type = '咨询'
-        </if>
-		GROUP BY word_name
-		ORDER BY SUM(frequency_count))c on a.word_name = c.word_name
-		ORDER BY b.sumCount desc LIMIT 100
-    </select>
     
-    <select id="queryHotWordGoingUp" resultType="AnsHotwords">
-        SELECT a.*,b.sumCount as sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) as rose  FROM tbl_ans_hotwords a
-		INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-		WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;= #{newEndDate}
-		<if test="type == 1">
-          AND type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          AND type = '咨询'
-        </if>
-		GROUP BY word_name
-		ORDER BY SUM(frequency_count))b on a.id = b.id
-		LEFT JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-		WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;= #{oldEndDate} 
+    <select id="queryHotWordRank" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT a.*,b.sumCount as
+        sumCount,IF(ISNULL(b.sumCount),0,b.sumCount)-IF(ISNULL(c.sumCount),0,c.sumCount)
+        as rose FROM tbl_ans_hotwords a
+        INNER JOIN (SELECT
+        *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
+        WHERE
+        statistical_date &gt;= #{newStartDate} and statistical_date &lt;=
+        #{newEndDate}
         <if test="type == 1">
-          AND type &lt;&gt; '咨询'
+            AND type &lt;&gt; '咨询'
         </if>
         <if test="type == 2">
-          AND type = '咨询'
-        </if>
-		GROUP BY word_name
-		ORDER BY SUM(frequency_count))c on a.word_name = c.word_name
-		WHERE c.sumCount &lt;&gt; 0
-		ORDER BY IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) desc LIMIT 10
-    </select>
-    
-    <select id="queryHotWordDeclining" resultType="AnsHotwords">
-        SELECT a.*,b.sumCount as sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) as rose  FROM tbl_ans_hotwords a
-        INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-        WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;= #{newEndDate}
-        <if test="type == 1">
-          AND type &lt;&gt; '咨询'
-        </if>
-        <if test="type == 2">
-          AND type = '咨询'
+            AND type = '咨询'
         </if>
         GROUP BY word_name
         ORDER BY SUM(frequency_count))b on a.id = b.id
-        LEFT JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
-        WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;= #{oldEndDate} 
+        LEFT
+        JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords
+        a
+        WHERE statistical_date &gt;= #{oldStartDate} and statistical_date
+        &lt;= #{oldEndDate}
         <if test="type == 1">
-          AND type &lt;&gt; '咨询'
+            AND type &lt;&gt; '咨询'
         </if>
         <if test="type == 2">
-          AND type = '咨询'
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
+        ORDER BY SUM(frequency_count))c on a.word_name =
+        c.word_name
+        ORDER BY b.sumCount desc LIMIT 100
+    </select>
+
+    <select id="queryHotWordGoingUp" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT a.*,b.sumCount as
+        sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount)
+        as rose FROM tbl_ans_hotwords a
+        INNER JOIN (SELECT
+        *,SUM(frequency_count) as sumCount From tbl_ans_hotwords a
+        WHERE
+        statistical_date &gt;= #{newStartDate} and statistical_date &lt;=
+        #{newEndDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
+        ORDER BY SUM(frequency_count))b on a.id = b.id
+        LEFT
+        JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords
+        a
+        WHERE statistical_date &gt;= #{oldStartDate} and statistical_date
+        &lt;= #{oldEndDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
+        ORDER BY SUM(frequency_count))c on a.word_name =
+        c.word_name
+        WHERE c.sumCount &lt;&gt; 0
+        ORDER BY
+        IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount)
+        desc LIMIT 10
+    </select>
+
+    <select id="queryHotWordDeclining" resultType="com.ggk.affairsanalysis.model.AnsHotwords">
+        SELECT a.*,b.sumCount as
+        sumCount,IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount)
+        as rose FROM tbl_ans_hotwords a
+        INNER JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords
+        a
+        WHERE statistical_date &gt;= #{newStartDate} and statistical_date &lt;=
+        #{newEndDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+            AND type = '咨询'
+        </if>
+        GROUP BY word_name
+        ORDER BY SUM(frequency_count))b on a.id = b.id
+        LEFT JOIN (SELECT *,SUM(frequency_count) as sumCount From tbl_ans_hotwords
+        a
+        WHERE statistical_date &gt;= #{oldStartDate} and statistical_date &lt;=
+        #{oldEndDate}
+        <if test="type == 1">
+            AND type &lt;&gt; '咨询'
+        </if>
+        <if test="type == 2">
+            AND type = '咨询'
         </if>
         GROUP BY word_name
         ORDER BY SUM(frequency_count))c on a.word_name = c.word_name
         WHERE c.sumCount &lt;&gt; 0
-        ORDER BY IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount) asc LIMIT 10
+        ORDER BY
+        IF(ISNULL(c.sumCount),0,IF(ISNULL(b.sumCount-c.sumCount),0,b.sumCount-c.sumCount)/c.sumCount)
+        asc LIMIT 10
     </select>
-    
+
 </mapper>

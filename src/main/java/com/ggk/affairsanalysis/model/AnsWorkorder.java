@@ -7,10 +7,10 @@ public class AnsWorkorder {
 	
 	private String woID;//编码
 	private String callId; //呼叫编号
-	private Timestamp callDate; //呼叫时间
+	private String callDate; //呼叫时间
 	private String phone; //来电电话
 	private String phoneHome; //来电归属
-	private Timestamp woRegisterDate; //登记时间
+	private String woRegisterDate; //登记时间
 	private String appealSrc; //诉求来源
 	private String woType; //工单类型
 	private String woStatus; //工单状态
@@ -23,14 +23,29 @@ public class AnsWorkorder {
 	private String incidentSiteLargeArea; //事发地点
 	private String incidentSiteSmallArea; //事发地地点小区
 	private String monitorStatus; //监察状态
-	private Timestamp woDeadline; //最后处理期限
+	private String woDeadline; //最后处理期限
 	private String woDealLastDate; //最后处理日期
 	private BigDecimal preAlarmDay; //预警天簌
 	private BigDecimal alarmDay; //告警天数
 	private String satisfaction; //满意度
-	private Timestamp woCloseDate; //工单关闭时间
+	private String woCloseDate; //工单关闭时间
 	private String remarks; //工单备注
-	private Timestamp migrateDate; //迁移日期
+	private String migrateDate; //迁移日期
+	
+	
+	
+	public String getWoRegisterDate() {
+		return woRegisterDate;
+	}
+	public void setWoRegisterDate(String woRegisterDate) {
+		this.woRegisterDate = woRegisterDate;
+	}
+	public String getWoDeadline() {
+		return woDeadline;
+	}
+	public void setWoDeadline(String woDeadline) {
+		this.woDeadline = woDeadline;
+	}
 	public String getWoID() {
 		return woID;
 	}
@@ -43,10 +58,10 @@ public class AnsWorkorder {
 	public void setCallId(String callId) {
 		this.callId = callId;
 	}
-	public Timestamp getCallDate() {
+	public String getCallDate() {
 		return callDate;
 	}
-	public void setCallDate(Timestamp callDate) {
+	public void setCallDate(String callDate) {
 		this.callDate = callDate;
 	}
 	public String getPhone() {
@@ -61,12 +76,7 @@ public class AnsWorkorder {
 	public void setPhoneHome(String phoneHome) {
 		this.phoneHome = phoneHome;
 	}
-	public Timestamp getWoRegisterDate() {
-		return woRegisterDate;
-	}
-	public void setWoRegisterDate(Timestamp woRegisterDate) {
-		this.woRegisterDate = woRegisterDate;
-	}
+
 	public String getAppealSrc() {
 		return appealSrc;
 	}
@@ -139,12 +149,7 @@ public class AnsWorkorder {
 	public void setMonitorStatus(String monitorStatus) {
 		this.monitorStatus = monitorStatus;
 	}
-	public Timestamp getWoDeadline() {
-		return woDeadline;
-	}
-	public void setWoDeadline(Timestamp woDeadline) {
-		this.woDeadline = woDeadline;
-	}
+
 	public String getWoDealLastDate() {
 		return woDealLastDate;
 	}
@@ -169,10 +174,10 @@ public class AnsWorkorder {
 	public void setSatisfaction(String satisfaction) {
 		this.satisfaction = satisfaction;
 	}
-	public Timestamp getWoCloseDate() {
+	public String getWoCloseDate() {
 		return woCloseDate;
 	}
-	public void setWoCloseDate(Timestamp woCloseDate) {
+	public void setWoCloseDate(String woCloseDate) {
 		this.woCloseDate = woCloseDate;
 	}
 	public String getRemarks() {
@@ -181,10 +186,10 @@ public class AnsWorkorder {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public Timestamp getMigrateDate() {
+	public String getMigrateDate() {
 		return migrateDate;
 	}
-	public void setMigrateDate(Timestamp migrateDate) {
+	public void setMigrateDate(String migrateDate) {
 		this.migrateDate = migrateDate;
 	}
 	
